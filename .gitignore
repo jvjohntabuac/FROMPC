@@ -1,0 +1,9 @@
+# Ignore the user_accounts.db file
+user_accounts.db
+
+# Ignore all .log files
+*.log
+
+# Ignore the node_modules directory
+node_modules/
+
