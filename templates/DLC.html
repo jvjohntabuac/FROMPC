@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLC Guide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button-container">
+        <a href="{{ url_for('home') }}" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.71 16.29L12.41 14H19v-2H12.41l2.3-2.29L14 8l-6 6 6 6z"/></svg>
+        
+        </a>
+    </div>
+
+    <!-- Animated PNG -->
+    <div class="chibi-container">
+        <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Chibi Character" class="chibi-img">
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content container">
+        <div class="row">
+            <!-- Guide Content -->
+            <div class="col-md-9">
+                <!-- Image Container -->
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Guide Image">
+                </div>
+                
+                <!-- Guide Sections -->
+                <div class="guide-content">
+                    <h2>DLC Boss Guide</h2>
+                    
+                    <!-- Section 1 -->
+                    <div class="section-space">
+                        <h3 id="dancing-lion">Dancing Lion</h3>
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='uploads/chibi.jpeg') }}" alt="Dancing Lion Image">
+                        </div>
+                        <p>Put text here...</p>
+                        <!-- Image containers and spacing -->
+                        <div class="carousel">
+                            <div class="large-image">
+                                <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Dancing Lion Large Image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2 -->
+                    <div class="section-space">
+                        <h3 id="renalla">Renalla</h3>
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='uploads/section2_image.jpg') }}" alt="Renalla Image">
+                        </div>
+                        <p>Put text here...</p>
+                        <!-- Image containers and spacing -->
+                        <div class="carousel">
+                            <div class="large-image">
+                                <img src="{{ url_for('static', filename='uploads/section2_large_image.jpg') }}" alt="Renalla Large Image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3 -->
+                    <div class="section-space">
+                        <h3 id="messmer">Messmer</h3>
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Messmer Image">
+                        </div>
+                        <p>Put text here...</p>
+                        <!-- Image containers and spacing -->
+                        <div class="carousel">
+                            <div class="large-image">
+                                <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Messmer Large Image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 4 -->
+                    <div class="section-space">
+                        <h3 id="gaius">Gaius</h3>
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='uploads/section4_image.jpg') }}" alt="Gaius Image">
+                        </div>
+                        <p>Put text here...</p>
+                        <!-- Image containers and spacing -->
+                        <div class="carousel">
+                            <div class="large-image">
+                                <img src="{{ url_for('static', filename='uploads/section4_large_image.jpg') }}" alt="Gaius Large Image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 5 -->
+                    <div class="section-space">
+                        <h3 id="bayle">Bayle</h3>
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='uploads/section5_image.jpg') }}" alt="Bayle Image">
+                        </div>
+                        <p>Put text here...</p>
+                        <!-- Image containers and spacing -->
+                        <div class="carousel">
+                            <div class="large-image">
+                                <img src="{{ url_for('static', filename='uploads/section5_large_image.jpg') }}" alt="Bayle Large Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown Navigation -->
+            <div class="col-md-3">
+                <div class="dropdown-navigation">
+                    <h3>Guide Sections</h3>
+                    <select class="custom-select" onchange="location = this.value;">
+                        <option value="" selected>Choose a section</option>
+                        <option value="#dancing-lion">Dancing Lion</option>
+                        <option value="#renalla">Renalla</option>
+                        <option value="#messmer">Messmer</option>
+                        <option value="#gaius">Gaius</option>
+                        <option value="#bayle">Bayle</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
