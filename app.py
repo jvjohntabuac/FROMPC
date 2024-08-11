@@ -8,7 +8,7 @@ import base64
 from io import BytesIO
 from flask_wtf.csrf import CSRFProtect
 
-# Initialize Flask appp
+# Initialize Flask app
 app = Flask(__name__)
 app.secret_key = 'yHjLEqrN3b'
 UPLOAD_FOLDER = 'static/uploads/'
