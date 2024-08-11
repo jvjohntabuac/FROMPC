@@ -7,3 +7,15 @@ user_accounts.db
 # Ignore the node_modules directory
 node_modules/
 
+*.venv/
+*.venv
+.venv
+
+lib
+lib/
+include/
+bin
+bin/
+
+.DS_Stores
+
