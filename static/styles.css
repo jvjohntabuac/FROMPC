@@ -594,7 +594,7 @@ img {
 
 /* Jump Animation on Hover */
 .chibi-container:hover .chibi-img {
-    animation: jump 1s forwards; /* Apply the animation on hover, play once */
+    animation: jump 0.2s forwards; /* Apply the animation on hover, play once */
 }
 
 /* Jump Animation */
@@ -628,7 +628,7 @@ img {
 }
 
 .main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 {
-    color: white; /* Ensure headings are white */
+    color: rgb(0, 0, 0); /* Ensure headings are white */
 }
 
 .main-content p, .main-content span, .main-content a {
