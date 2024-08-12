@@ -38,6 +38,7 @@ class SignupForm(FlaskForm):
     email = StringField('Email', validators=[InputRequired(), Email()])
     newuname = StringField('Username', validators=[InputRequired()])
     newpsw = PasswordField('Password', validators=[InputRequired(), Length(min=6)])
+    confpsw = PasswordField('Confirm Password', validators=[InputRequired()])
 
 class CreatePostForm(FlaskForm):
     content = TextAreaField('Content')
@@ -79,6 +80,18 @@ def signup():
         email = form.email.data
         username = form.newuname.data
         password = form.newpsw.data
+        confirm_password = form.confpsw.data
+
+        # Check if passwords match
+        if password != confirm_password:
+            flash('Passwords do not match.', 'error')
+            return redirect(url_for('signup'))
+
+        # Additional email validation logic
+        if not validate_email(email):
+            flash('Invalid email address.', 'error')
+            return redirect(url_for('signup'))
+
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         hashed_password_hex = hashed_password.hex()
 
@@ -89,14 +102,18 @@ def signup():
             flash('Account created successfully, please login.')
             return redirect(url_for('login'))
         except sqlite3.IntegrityError as e:
-            flash(f'Error: That email or username already exists. Details: {e}')
+            flash(f'Error: That email or username already exists. Details: {e}', 'error')
             print(f'IntegrityError: {e}')
         except sqlite3.Error as e:
-            flash(f'An unexpected error occurred: {e}')
+            flash(f'An unexpected error occurred: {e}', 'error')
             print(f'SQLite Error: {e}')
         finally:
             conn.close()
     return render_template('signup.html', form=form)
+
+def validate_email(email):
+    # Implement actual email validation logic if needed
+    return '@' in email and '.' in email
 
 
 @app.route('/home')

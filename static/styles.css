@@ -60,6 +60,25 @@ label {
     text-align: center;
     overflow: hidden;
 }
+.flash-messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flash-messages li {
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.flash-messages .error {
+    color: red;
+}
+
+.flash-messages .success {
+    color: green;
+}
+
 
 .container::before,
 .container::after {
@@ -609,20 +628,44 @@ img {
         transform: translateY(0);
     }
 }
-/* Sprite Image Styles */
+/* Updated Sprite Styles */
 .sprite-img {
-    display: none;
     position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 50%;
+    bottom: 20px; /* Adjust as needed */
+    right: 0; /* Move to the right side of the screen */
+    width: 50%; /* Adjust size as needed */
     height: auto;
-    z-index: 1002;
+    display: none; /* Initially hidden */
+    z-index: 1002; /* Ensure it appears above other content */
 }
+
+/* Hide Text Box */
+.text-box.hidden {
+    display: none; /* Hide the text box */
+}
+
 
 .sprite-img.show {
     opacity: 1;
 }
+/* Text Box Container */
+.text-box {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom of the screen */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    color: #fff; /* White text color */
+    padding: 20px; /* Increased padding for more height */
+    box-sizing: border-box; /* Include padding in width */
+    font-size: 16px; /* Adjust as needed */
+    text-align: left; /* Align text to the left for multiple lines */
+    z-index: 1003; /* Ensure it appears above other content */
+    display: none; /* Hidden by default */
+    overflow-y: auto; /* Allow scrolling if text overflows */
+    max-height: 300px; /* Adjust as needed */
+}
+
 
 
 /* Main content area */

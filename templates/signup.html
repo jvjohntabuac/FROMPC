@@ -23,11 +23,21 @@
             <!-- CSRF Token -->
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <ul class="flash-messages">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
             <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter Email" name="email" required>
+            <input type="email" id="email" placeholder="Enter Email" name="email" required>
             
             <label for="newuname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="newuname" required>
+            <input type="text" id="newuname" placeholder="Enter Username" name="newuname" required>
 
             <label for="newpsw"><b>Password</b></label>
             <input type="password" id="newpsw" placeholder="Enter Password" name="newpsw" required>
