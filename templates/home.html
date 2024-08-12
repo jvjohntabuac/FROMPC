@@ -24,13 +24,21 @@
     </div>
 
     <!-- Chibi Container -->
-    <div class="chibi-container">
-        <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Chibi Character" class="chibi-img" onclick="togglePopup()">
-        <div id="comic-popup" class="comic-popup">
-            <div class="comic-arrow"></div>
-          WELCOME!
-        </div>
+<div class="chibi-container">
+   <!-- Chibi Container -->
+<div class="chibi-container">
+    <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Chibi Character" class="chibi-img" onclick="handleChibiClick()">
+    <div id="comic-popup" class="comic-popup">
+        <div class="comic-arrow"></div>
+       HALLOOOO!
     </div>
+</div>
+
+<!-- Sprite Image -->
+<img src="{{ url_for('static', filename='uploads/sprite.png') }}" alt="Sprite" id="sprite-img" class="sprite-img">
+
+</div>
+
 
     <!-- Main Content Area -->
     <div class="main-content">
@@ -67,28 +75,20 @@
             var popup = document.getElementById("comic-popup");
             popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
         }
+        function toggleSprite() {
+    var popup = document.getElementById("comic-popup");
+    var sprite = document.getElementById("sprite");
 
-        function makeDraggable(element) {
-            var isDragging = false;
-            var offsetX, offsetY;
+    if (popup.style.display === "none" || popup.style.display === "") {
+        popup.style.display = "block";
+    } else if (sprite.style.display === "none" || sprite.style.display === "") {
+        sprite.style.display = "block";
+        setTimeout(function() {
+            sprite.classList.add("show");
+        }, 10); // Add a slight delay for the transition effect
+    }
+}
 
-            element.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                offsetX = e.clientX - element.getBoundingClientRect().left;
-                offsetY = e.clientY - element.getBoundingClientRect().top;
-            });
-
-            document.addEventListener('mousemove', function(e) {
-                if (isDragging) {
-                    element.style.left = (e.clientX - offsetX) + 'px';
-                    element.style.top = (e.clientY - offsetY) + 'px';
-                }
-            });
-
-            document.addEventListener('mouseup', function() {
-                isDragging = false;
-            });
-        }
 
         window.onload = function() {
             makeDraggable(document.getElementById("comic-popup"));
@@ -102,7 +102,23 @@
                 debounceTimeout = setTimeout(() => func.apply(this, args), delay);
             };
         }
+        let clickCount = 0;
 
+function handleChibiClick() {
+    clickCount++;
+    const popup = document.getElementById("comic-popup");
+    const sprite = document.getElementById("sprite-img");
+    const chibi = document.querySelector(".chibi-img");
+
+    if (clickCount === 1) {
+        popup.style.display = "block";
+    } else if (clickCount === 2) {
+        popup.style.display = "none";
+        sprite.style.display = "block";
+        chibi.style.display = "none"; // Hide chibi image
+    }
+}
+//NAVBAR
         function toggleNavbar() {
             const navbar = document.getElementById("navbar");
             const navToggle = document.getElementById("nav-toggle");
