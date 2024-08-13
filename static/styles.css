@@ -639,7 +639,7 @@ body {
 
 /* Jump Animation on Hover */
 .chibi-container:hover .chibi-img {
-    animation: jump 0.2s forwards; /* Apply the animation on hover, play once */
+    animation: jump 0.3s forwards; /* Apply the animation on hover, play once */
 }
 
 /* Jump Animation */
@@ -648,7 +648,7 @@ body {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-20px); /* Adjust jump height as needed */
+        transform: translateY(-40px); /* Adjust jump height as needed */
     }
     100% {
         transform: translateY(0);
@@ -662,7 +662,7 @@ body {
     width: 50%; /* Adjust size as needed */
     height: auto;
     display: none; /* Initially hidden */
-    z-index: 1002; /* Ensure it appears above other content */
+    z-index: 802; /* Ensure it appears above other content */
 }
 
 /* Hide Text Box */

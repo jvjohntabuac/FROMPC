@@ -22,7 +22,7 @@ https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-e
 
 4. Under the project directory, run the following command
 
-    python3 -m venv .venv
+    cd /project/location/path
 
     Note: You should exclude your virtual environment directory from your version control system using .gitignore or similar.
 
