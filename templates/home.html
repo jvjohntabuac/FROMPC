@@ -75,11 +75,12 @@
 
     <!-- JavaScript -->
     <script>
-        function togglePopup() {
-            var popup = document.getElementById("comic-popup");
-            popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
-        }
-        function toggleSprite() {
+       function togglePopup() {
+    var popup = document.getElementById("comic-popup");
+    popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
+}
+
+function toggleSprite() {
     var popup = document.getElementById("comic-popup");
     var sprite = document.getElementById("sprite");
 
@@ -93,28 +94,39 @@
     }
 }
 
+window.onload = function() {
+    makeDraggable(document.getElementById("comic-popup"));
+}
 
-        window.onload = function() {
-            makeDraggable(document.getElementById("comic-popup"));
-        }
+let debounceTimeout;
 
-        let debounceTimeout;
+function debounce(func, delay) {
+    return function(...args) {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}
 
-        function debounce(func, delay) {
-            return function(...args) {
-                clearTimeout(debounceTimeout);
-                debounceTimeout = setTimeout(() => func.apply(this, args), delay);
-            };
-        }
-        let clickCount = 0;
+let clickCount = 0;
 let spriteClickCount = 0; // Counter for sprite clicks
 const messages = [
     "WELCOME!",
     "Text2",
     "Text3",
-   
 ];
-    
+
+function typeText(element, text, callback) {
+    let index = 0;
+    const interval = setInterval(() => {
+        element.textContent += text[index];
+        index++;
+        if (index === text.length) {
+            clearInterval(interval);
+            if (callback) callback();
+        }
+    }, 50); // Typing speed (lower value = faster typing)
+}
+
 function handleChibiClick() {
     clickCount++;
     const popup = document.getElementById("comic-popup");
@@ -130,7 +142,8 @@ function handleChibiClick() {
         sprite.src = "{{ url_for('static', filename='uploads/sprite.png') }}"; // Load initial sprite
         chibi.style.display = "none"; // Hide chibi image
         textBox.style.display = "block"; // Show text box
-        textBox.textContent = messages[0]; // Show the first message
+        textBox.textContent = ""; // Clear text box before typing
+        typeText(textBox, messages[0]);
         spriteClickCount = 0; // Reset sprite click count
     }
 }
@@ -147,6 +160,12 @@ function handleSpriteClick() {
         sprite.style.display = "block"; // Ensure sprite is visible
         textBox.classList.add("hidden"); // Hide text box
         document.removeEventListener('click', handleDocumentClick); // Remove click event listener
+    } else {
+        const currentMessage = messages[spriteClickCount];
+        if (currentMessage) {
+            textBox.textContent = "";
+            typeText(textBox, currentMessage);
+        }
     }
 }
 
@@ -158,7 +177,8 @@ function handleDocumentClick() {
         const nextMessageIndex = messages.indexOf(currentMessage) + 1;
         
         if (nextMessageIndex < messages.length) {
-            textBox.textContent = messages[nextMessageIndex];
+            textBox.textContent = "";
+            typeText(textBox, messages[nextMessageIndex]);
         } else {
             textBox.textContent += " [End of messages]"; // Indicate end of messages if desired
         }
@@ -173,6 +193,7 @@ document.getElementById("sprite-img").addEventListener("click", handleSpriteClic
 
 // Attach the click event to the document
 document.addEventListener('click', handleDocumentClick);
+
 
 
 
