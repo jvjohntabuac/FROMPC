@@ -33,9 +33,16 @@
        HALLOOOO!
     </div>
 </div>
-
 <!-- Sprite Image -->
 <img src="{{ url_for('static', filename='uploads/sprite.png') }}" alt="Sprite" id="sprite-img" class="sprite-img">
+
+<!-- Second Sprite Image -->
+<img src="{{ url_for('static', filename='uploads/sprite2.png') }}" alt="Sprite2" id="sprite2-img" class="sprite-img">
+
+
+
+
+
 
 </div>
 <!-- Text Box -->
@@ -75,127 +82,129 @@
 
     <!-- JavaScript -->
     <script>
-       function togglePopup() {
-    var popup = document.getElementById("comic-popup");
-    popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
-}
-
-function toggleSprite() {
-    var popup = document.getElementById("comic-popup");
-    var sprite = document.getElementById("sprite");
-
-    if (popup.style.display === "none" || popup.style.display === "") {
-        popup.style.display = "block";
-    } else if (sprite.style.display === "none" || sprite.style.display === "") {
-        sprite.style.display = "block";
-        setTimeout(function() {
-            sprite.classList.add("show");
-        }, 10); // Add a slight delay for the transition effect
-    }
-}
-
-window.onload = function() {
-    makeDraggable(document.getElementById("comic-popup"));
-}
-
-let debounceTimeout;
-
-function debounce(func, delay) {
-    return function(...args) {
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(() => func.apply(this, args), delay);
-    };
-}
-
-let clickCount = 0;
-let spriteClickCount = 0; // Counter for sprite clicks
-const messages = [
-    "WELCOME!",
-    "Text2",
-    "Text3",
-];
-
-function typeText(element, text, callback) {
-    let index = 0;
-    const interval = setInterval(() => {
-        element.textContent += text[index];
-        index++;
-        if (index === text.length) {
-            clearInterval(interval);
-            if (callback) callback();
+        function togglePopup() {
+            var popup = document.getElementById("comic-popup");
+            popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
         }
-    }, 50); // Typing speed (lower value = faster typing)
-}
-
-function handleChibiClick() {
-    clickCount++;
-    const popup = document.getElementById("comic-popup");
-    const sprite = document.getElementById("sprite-img");
-    const chibi = document.querySelector(".chibi-img");
-    const textBox = document.getElementById("text-box");
-
-    if (clickCount === 1) {
-        popup.style.display = "block";
-    } else if (clickCount === 2) {
-        popup.style.display = "none";
-        sprite.style.display = "block";
-        sprite.src = "{{ url_for('static', filename='uploads/sprite.png') }}"; // Load initial sprite
-        chibi.style.display = "none"; // Hide chibi image
-        textBox.style.display = "block"; // Show text box
-        textBox.textContent = ""; // Clear text box before typing
-        typeText(textBox, messages[0]);
-        spriteClickCount = 0; // Reset sprite click count
-    }
-}
-
-function handleSpriteClick() {
-    spriteClickCount++;
-    const sprite = document.getElementById("sprite-img");
-    const textBox = document.getElementById("text-box");
-
-    if (spriteClickCount === 2) {
-        sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}"; // Change sprite image
-        sprite.style.right = "0"; // Move sprite to the right side
-        sprite.style.width = "50%"; // Adjust size
-        sprite.style.display = "block"; // Ensure sprite is visible
-        textBox.classList.add("hidden"); // Hide text box
-        document.removeEventListener('click', handleDocumentClick); // Remove click event listener
-    } else {
-        const currentMessage = messages[spriteClickCount];
-        if (currentMessage) {
-            textBox.textContent = "";
-            typeText(textBox, currentMessage);
-        }
-    }
-}
-
-function handleDocumentClick() {
-    const textBox = document.getElementById("text-box");
-    
-    if (textBox.style.display === "block") {
-        const currentMessage = textBox.textContent;
-        const nextMessageIndex = messages.indexOf(currentMessage) + 1;
         
-        if (nextMessageIndex < messages.length) {
-            textBox.textContent = "";
-            typeText(textBox, messages[nextMessageIndex]);
-        } else {
-            textBox.textContent += " [End of messages]"; // Indicate end of messages if desired
+        function toggleSprite() {
+            var popup = document.getElementById("comic-popup");
+            var sprite = document.getElementById("sprite-img"); // Ensure the ID matches
+        
+            if (popup.style.display === "none" || popup.style.display === "") {
+                popup.style.display = "block";
+            } else if (sprite.style.display === "none" || sprite.style.display === "") {
+                sprite.style.display = "block";
+                setTimeout(function() {
+                    sprite.classList.add("show");
+                }, 10); // Add a slight delay for the transition effect
+            }
         }
-    }
-}
+        
+        window.onload = function() {
+            makeDraggable(document.getElementById("comic-popup"));
+        }
+        
+        let debounceTimeout;
+        let typingInterval;
+        
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+        
+        let clickCount = 0;
+        let spriteClickCount = 0; // Counter for sprite clicks
+        const messages = [
+            "Welcome to our website! We're excited to have you join our community. Explore our content, discover new features, and feel free to reach out if you need any assistance. Enjoy your visit!",
+            "dafyavfadfvday",
+            "dafyavfadfvday",
+            "dafyavfadfvday",
+        ];
+        
+        function typeText(element, text, callback) {
+            clearInterval(typingInterval); // Clear any previous typing intervals
+            element.textContent = ""; // Ensure the text box is cleared before typing
+            let index = 0;
+            typingInterval = setInterval(() => {
+                element.textContent += text[index];
+                index++;
+                if (index === text.length) {
+                    clearInterval(typingInterval);
+                    if (callback) callback();
+                }
+            }, 50); // Typing speed (lower value = faster typing)
+        }
+        
+        function handleChibiClick() {
+            clickCount++;
+            const popup = document.getElementById("comic-popup");
+            const sprite = document.getElementById("sprite-img");
+            const chibi = document.querySelector(".chibi-img");
+            const textBox = document.getElementById("text-box");
+        
+            if (clickCount === 1) {
+                popup.style.display = "block";
+            } else if (clickCount === 2) {
+                popup.style.display = "none";
+                sprite.style.display = "block";
+                sprite.src = "{{ url_for('static', filename='uploads/sprite.png') }}"; // Load initial sprite
+                chibi.style.display = "none"; // Hide chibi image
+                textBox.style.display = "block"; // Show text box
+                typeText(textBox, messages[0]); // Start typing the first message
+                spriteClickCount = 0; // Reset sprite click count
+            }
+        }
+        
+        function handleSpriteClick() {
+            spriteClickCount++;
+            const sprite = document.getElementById("sprite-img");
+            const textBox = document.getElementById("text-box");
+        
+            if (spriteClickCount === 1) {
+                sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}"; // Change sprite image
+                sprite.style.right = "0"; // Move sprite to the right side
+                sprite.style.width = "50%"; // Adjust size
+                textBox.classList.add("hidden"); // Hide text box
+                document.removeEventListener('click', handleDocumentClick); // Remove click event listener
+            } else {
+                const currentMessage = messages[spriteClickCount];
+                if (currentMessage) {
+                    textBox.textContent = ""; // Clear text box before typing the next message
+                    typeText(textBox, currentMessage); // Start typing the next message
+                }
+            }
+        }
+        
+        function handleDocumentClick() {
+            const textBox = document.getElementById("text-box");
+            
+            if (textBox.style.display === "block") {
+                const currentMessage = textBox.textContent.trim(); // Trim spaces and newlines
+                const nextMessageIndex = messages.indexOf(currentMessage) + 1;
+                
+                if (nextMessageIndex < messages.length) {
+                    textBox.textContent = ""; // Clear text box before typing the next message
+                    typeText(textBox, messages[nextMessageIndex]); // Start typing the next message
+                } else {
+                    textBox.textContent += " [End of messages]"; // Indicate end of messages if desired
+                }
+            }
+        }
+        
+        // Attach the click event to the chibi image
+        document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
+        
+        // Attach the click event to the sprite image
+        document.getElementById("sprite-img").addEventListener("click", handleSpriteClick);
 
-// Attach the click event to the chibi image
-document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
-
-// Attach the click event to the sprite image
-document.getElementById("sprite-img").addEventListener("click", handleSpriteClick);
-
-// Attach the click event to the document
-document.addEventListener('click', handleDocumentClick);
-
-
-
+        
+        
+        // Attach the click event to the document
+        document.addEventListener('click', handleDocumentClick);
+        
 
 //NAVBAR
         function toggleNavbar() {

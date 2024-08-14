@@ -654,15 +654,24 @@ body {
         transform: translateY(0);
     }
 }
-/* Updated Sprite Styles */
+
 .sprite-img {
     position: fixed;
     bottom: 20px; /* Adjust as needed */
     right: 0; /* Move to the right side of the screen */
-    width: 50%; /* Adjust size as needed */
-    height: auto;
+    width: 30%; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
     display: none; /* Initially hidden */
     z-index: 802; /* Ensure it appears above other content */
+    transition: all 0.3s ease; /* Smooth transition for appearance changes */
+}
+
+
+
+
+/* Style for Showing the Sprite */
+.sprite-img.show {
+    opacity: 1; /* Make sprite visible */
 }
 
 /* Hide Text Box */
@@ -670,24 +679,7 @@ body {
     display: none; /* Hide the text box */
 }
 
-
-.sprite-img.show {
-    opacity: 1;
-}
-#text-box {
-    position: absolute;
-    top: 10%;
-    right: 10%;
-    width: 300px;
-    padding: 15px;
-    background-color: #333;
-    color: #00ff00;
-    font-family: "Courier New", Courier, monospace;
-    border: 2px solid #00ff00;
-    border-radius: 10px;
-    display: none;
-    z-index: 1000;
-}
+/* Text Box Styles */
 #text-box {
     position: absolute;
     top: 10%;
@@ -695,7 +687,7 @@ body {
     width: 300px;
     padding: 15px;
     background-color: #111;
-    color: #a402a4;
+    color: #ffffff;
     font-family: "Courier New", Courier, monospace;
     border: 2px solid #ea00ff;
     border-radius: 10px;
@@ -704,6 +696,7 @@ body {
     white-space: pre-wrap; /* Preserve spaces and line breaks */
 }
 
+/* Terminal Cursor Animation */
 .terminal-box::after {
     content: "";
     display: inline-block;
@@ -719,16 +712,6 @@ body {
     50% { opacity: 0; }
 }
 
-
-#sprite-img {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 50%; /* Adjust size */
-    display: none;
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
 
 .hidden {
     display: none;
@@ -773,6 +756,5 @@ body {
     margin: 0 auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 
 
