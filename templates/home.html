@@ -123,6 +123,8 @@
             "dafyavfadfvday",
             "dafyavfadfvday",
         ];
+   
+
         
         function typeText(element, text, callback) {
             clearInterval(typingInterval); // Clear any previous typing intervals
@@ -193,6 +195,21 @@
                 }
             }
         }
+        function typeText(element, text, callback) {
+            clearInterval(typingInterval); // Clear any previous typing intervals
+            element.textContent = ""; // Ensure the text box is cleared before typing
+            let index = 0;
+            typingInterval = setInterval(() => {
+                element.textContent += text[index];
+                index++;
+                if (index === text.length) {
+                    clearInterval(typingInterval);
+                    if (callback) callback();
+                }
+            }, 20); // Typing speed (lower value = faster typing)
+        }
+        
+        
         
         // Attach the click event to the chibi image
         document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
@@ -204,6 +221,8 @@
         
         // Attach the click event to the document
         document.addEventListener('click', handleDocumentClick);
+        
+   
         
 
 //NAVBAR

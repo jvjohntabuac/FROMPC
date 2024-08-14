@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DLC Boss Guide</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <div class="area-title" id="area-title">
+        <h1>HALLOOOO</h1>
+    </div>
+    
     <style>
         /* Apply white color to all headings and paragraphs */
         h1, h2, h3, h4, h5, h6, p, li {
@@ -50,6 +54,27 @@
             cursor: pointer;
             padding: 10px;
         }
+        .area-title {
+            position: fixed; /* Keeps it in place as the user scrolls */
+            top: 50%; /* Centers it vertically */
+            left: 50%; /* Centers it horizontally */
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+            text-align: center;
+            opacity: 0; /* Start hidden */
+            visibility: hidden;
+            z-index: 1000;
+            transition: opacity 2s ease-in-out, visibility 2s ease-in-out; /* Fade effect */
+        }
+        
+        .area-title.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
     </style>
 </head>
 <body>
@@ -314,6 +339,20 @@ document.addEventListener('DOMContentLoaded', () => {
         carousel.querySelector('.carousel-control button:nth-child(2)').addEventListener('click', nextSlide);
     });
 });
+// title animation
+function showAreaTitle() {
+    const areaTitle = document.getElementById('area-title');
+    areaTitle.classList.add('show');
+
+    // Fade out after 3 seconds
+    setTimeout(() => {
+        areaTitle.classList.remove('show');
+    }, 3000); // Adjust the time as needed
+}
+
+// Trigger the function when the page loads or when the user enters a specific section
+window.onload = showAreaTitle;
+
 
         
     </script>
