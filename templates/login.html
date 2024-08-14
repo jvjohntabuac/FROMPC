@@ -11,6 +11,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
     <!-- Title of the page that appears in the browser tab -->
     <title>Login Page</title>
+    <!-- Display flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+            <div class="notification {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endwith %}
+
     <style>
         /* Body styling with a dark background */
         body {
@@ -108,6 +121,30 @@
         a:hover {
             color: white;
         }
+        .flash-messages {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.notification {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.notification.success {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.notification.error {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
     </style>
 </head>
 <body>
