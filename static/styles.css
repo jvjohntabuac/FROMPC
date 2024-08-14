@@ -345,106 +345,176 @@ label {
     margin-right: 8px;
 }
 
-/* Guide page specific styles */
-.guide-content {
-    background-color: #1c1c1c; /* Dark background for guide */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-    margin-bottom: 40px; /* Space between sections */
-}
-
-.guide-title {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    color: #d4af37; /* Gold color */
-}
-
-.guide-text {
-    font-size: 1.1em;
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    margin-bottom: 20px;
-    color: #f5f5f5; /* Light text */
+    color: #333;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
 }
 
-.guide-list {
-    margin-bottom: 20px;
+.container {
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
 }
 
-.image-placeholder {
-    background-color: #2c2c2c;
-    border: 1px solid #444;
-    border-radius: 4px;
-    padding: 20px;
+/* Back Button */
+.back-button-container {
+    margin: 20px 0;
     text-align: center;
-    color: #f5f5f5;
-    font-size: 1.1em;
-    margin-bottom: 20px;
 }
 
-.image-placeholder img {
-    max-width: 100%;
-    height: auto;
-}
-
-.pagination a {
-    background-color: #d4af37; /* Gold color */
-    color: #2c2c2c;
-    padding: 10px 15px;
+.back-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-.pagination a:hover {
-    background-color: #b89d30; /* Darker gold */
+.back-button:hover {
+    background-color: #0056b3;
 }
 
-.pagination a.active {
-    font-weight: bold;
-    background-color: #b89d30; /* Darker gold for active */
-    color: #2c2c2c;
+.back-button svg {
+    vertical-align: middle;
+    margin-right: 8px;
 }
 
-/* Ensure images are displayed and not oversized */
-img {
+/* Chibi Container */
+.chibi-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.chibi-img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Main Content */
+.main-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.image-container img {
     max-width: 100%;
     height: auto;
-    display: block; /* Ensure images are not display:none */
-    margin: 0 auto; /* Center images */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Dropdown Navigation Styles */
-.dropdown-navigation {
-    background-color: #1c1c1c; /* Dark background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-    padding: 20px;
+.guide-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ecd5d5;
+    font-size: 28px;
+}
+
+/* Wiki Sections */
+.wiki-section {
+    margin-bottom: 40px;
+}
+
+.wiki-section h3 {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.wiki-section p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.wiki-section ul {
+    list-style: disc;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+.wiki-section ul li {
+    margin-bottom: 10px;
+}
+
+/* Carousel */
+.carousel {
     margin-top: 20px;
 }
 
-.dropdown-navigation h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #d4af37; /* Gold color */
+.carousel .large-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-navigation select {
+/* Dropdown Navigation */
+.dropdown-navigation {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-navigation h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 20px;
+}
+
+.custom-select {
     width: 100%;
-    padding: 10px;
-    font-size: 1.1em;
+    padding: 12px;
     border-radius: 5px;
-    border: 1px solid #666;
-    background-color: #2c2c2c;
-    color: #f5f5f5;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    font-size: 16px;
     transition: border-color 0.3s ease;
 }
 
-.dropdown-navigation select:hover {
-    border-color: #d4af37; /* Gold color */
+.custom-select:focus {
+    border-color: #007bff;
+    outline: none;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .col-md-9, .col-md-3 {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .back-button {
+        display: block;
+        text-align: center;
+        margin: 10px auto;
+    }
+}
+
 
 /* Hide navbar toggle button when navbar is open */
 .navbar.active ~ .nav-toggle {
@@ -480,7 +550,7 @@ img {
 }
 
 .like-button.liked {
-    background-color: #f44336; /* Color when liked */
+    background-color: #b5c501; /* Color when liked */
 }
 
 .like-button.liked:hover {
@@ -738,7 +808,7 @@ body {
 }
 
 .main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 {
-    color: rgb(0, 0, 0); /* Ensure headings are white */
+    color: rgb(255, 255, 255); /* Ensure headings are white */
 }
 
 .main-content p, .main-content span, .main-content a {

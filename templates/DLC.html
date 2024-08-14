@@ -3,15 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DLC Guide</title>
+    <title>DLC Boss Guide</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Apply white color to all headings and paragraphs */
+        h1, h2, h3, h4, h5, h6, p, li {
+            color: white;
+        }
+        
+        /* Carousel container */
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+        }
+        
+        /* Carousel images */
+        .carousel img {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Carousel inner wrapper */
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        /* Carousel controls */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        
+        .carousel-control button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <!-- Back Button -->
     <div class="back-button-container">
         <a href="{{ url_for('home') }}" class="back-button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.71 16.29L12.41 14H19v-2H12.41l2.3-2.29L14 8l-6 6 6 6z"/></svg>
-        
         </a>
     </div>
 
@@ -25,7 +70,6 @@
         <div class="row">
             <!-- Guide Content -->
             <div class="col-md-9">
-                <!-- Image Container -->
                 <div class="image-container">
                     <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Guide Image">
                 </div>
@@ -34,78 +78,158 @@
                 <div class="guide-content">
                     <h2>DLC Boss Guide</h2>
                     
-                    <!-- Section 1 -->
+                    <!-- Section 1: Dancing Lion -->
                     <div class="section-space">
                         <h3 id="dancing-lion">Dancing Lion</h3>
-                        <div class="image-container">
-                            <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Dancing Lion Image">
-                        </div>
-                        <p>Put text here...</p>
-                        <!-- Image containers and spacing -->
-                        <div class="carousel">
-                            <div class="large-image">
-                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Dancing Lion Large Image">
+                        <div class="carousel" id="dancing-lion-carousel">
+                            <div class="carousel-inner">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Dancing Lion Image 1">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Dancing Lion Image 2">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Dancing Lion Image 3">
                             </div>
+                            <div class="carousel-control">
+                                <button onclick="prevSlide('dancing-lion-carousel')">&#10094;</button>
+                                <button onclick="nextSlide('dancing-lion-carousel')">&#10095;</button>
+                            </div>
+                        </div>
+                        <div class="wiki-section">
+                            <h4>Overview</h4>
+                            <p>The Dancing Lion is known for its swift and unpredictable movements. This boss excels in agility, making its attacks difficult to anticipate.</p>
+                            <h4>Strategies</h4>
+                            <ul>
+                                <li>Maintain a safe distance to avoid its rapid attacks.</li>
+                                <li>Use ranged attacks to capitalize on its brief moments of vulnerability.</li>
+                                <li>Keep moving to avoid its area-of-effect attacks.</li>
+                            </ul>
+                            <h4>Weaknesses</h4>
+                            <ul>
+                                <li>Susceptible to high-damage, fast attacks.</li>
+                                <li>Its leaping attacks can be avoided with precise timing.</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <!-- Section 2 -->
+                    <!-- Section 2: Renalla -->
                     <div class="section-space">
                         <h3 id="renalla">Renalla</h3>
-                        <div class="image-container">
-                            <img src="{{ url_for('static', filename='uploads/section2_image.jpg') }}" alt="Renalla Image">
-                        </div>
-                        <p>Put text here...</p>
-                        <!-- Image containers and spacing -->
-                        <div class="carousel">
-                            <div class="large-image">
-                                <img src="{{ url_for('static', filename='uploads/section2_large_image.jpg') }}" alt="Renalla Large Image">
+                        <div class="carousel" id="renalla-carousel">
+                            <div class="carousel-inner">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Renalla Image 1">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Renalla Image 2">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Renalla Image 3">
                             </div>
+                            <div class="carousel-control">
+                                <button onclick="prevSlide('renalla-carousel')">&#10094;</button>
+                                <button onclick="nextSlide('renalla-carousel')">&#10095;</button>
+                            </div>
+                        </div>
+                        <div class="wiki-section">
+                            <h4>Overview</h4>
+                            <p>Renalla is a powerful sorceress with a vast array of magical attacks that can overwhelm players if not handled properly.</p>
+                            <h4>Strategies</h4>
+                            <ul>
+                                <li>Close the distance quickly to disrupt her spellcasting.</li>
+                                <li>Use magic-resistant gear to reduce damage from her spells.</li>
+                                <li>Pay attention to her attack patterns to avoid her most dangerous spells.</li>
+                            </ul>
+                            <h4>Weaknesses</h4>
+                            <ul>
+                                <li>Vulnerable to interruptions during her spellcasting.</li>
+                                <li>Magic attacks can be reduced with proper gear and timing.</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <!-- Section 3 -->
+                    <!-- Section 3: Messmer -->
                     <div class="section-space">
                         <h3 id="messmer">Messmer</h3>
-                        <div class="image-container">
-                            <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Messmer Image">
-                        </div>
-                        <p>Put text here...</p>
-                        <!-- Image containers and spacing -->
-                        <div class="carousel">
-                            <div class="large-image">
-                                <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Messmer Large Image">
+                        <div class="carousel" id="messmer-carousel">
+                            <div class="carousel-inner">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Messmer Image 1">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Messmer Image 2">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Messmer Image 3">
                             </div>
+                            <div class="carousel-control">
+                                <button onclick="prevSlide('messmer-carousel')">&#10094;</button>
+                                <button onclick="nextSlide('messmer-carousel')">&#10095;</button>
+                            </div>
+                        </div>
+                        <div class="wiki-section">
+                            <h4>Overview</h4>
+                            <p>Messmer is known for his high defense and powerful counterattacks. This boss requires careful timing and strategy to defeat.</p>
+                            <h4>Strategies</h4>
+                            <ul>
+                                <li>Look for openings in his defense after he finishes a combo.</li>
+                                <li>Use fast, high-damage moves to exploit these openings.</li>
+                                <li>Maintain a defensive posture to mitigate damage from his heavy attacks.</li>
+                            </ul>
+                            <h4>Weaknesses</h4>
+                            <ul>
+                                <li>High-damage attacks can break through his defense if timed correctly.</li>
+                                <li>Defensive maneuvers can help avoid his powerful counterattacks.</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <!-- Section 4 -->
+                    <!-- Section 4: Gaius -->
                     <div class="section-space">
                         <h3 id="gaius">Gaius</h3>
-                        <div class="image-container">
-                            <img src="{{ url_for('static', filename='uploads/section4_image.jpg') }}" alt="Gaius Image">
-                        </div>
-                        <p>Put text here...</p>
-                        <!-- Image containers and spacing -->
-                        <div class="carousel">
-                            <div class="large-image">
-                                <img src="{{ url_for('static', filename='uploads/section4_large_image.jpg') }}" alt="Gaius Large Image">
+                        <div class="carousel" id="gaius-carousel">
+                            <div class="carousel-inner">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Gaius Image 1">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Gaius Image 2">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Gaius Image 3">
                             </div>
+                            <div class="carousel-control">
+                                <button onclick="prevSlide('gaius-carousel')">&#10094;</button>
+                                <button onclick="nextSlide('gaius-carousel')">&#10095;</button>
+                            </div>
+                        </div>
+                        <div class="wiki-section">
+                            <h4>Overview</h4>
+                            <p>Gaius is a formidable warrior with a mix of strong melee and magic attacks. His versatility makes him a challenging opponent.</p>
+                            <h4>Strategies</h4>
+                            <ul>
+                                <li>Use hit-and-run tactics to avoid his powerful melee attacks.</li>
+                                <li>Be prepared to dodge his magic attacks and counter quickly.</li>
+                                <li>Focus on avoiding his most powerful moves while looking for openings.</li>
+                            </ul>
+                            <h4>Weaknesses</h4>
+                            <ul>
+                                <li>His attack patterns are predictable if observed carefully.</li>
+                                <li>Quick, precise attacks can exploit his slow recovery times.</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <!-- Section 5 -->
+                    <!-- Section 5: Bayle -->
                     <div class="section-space">
                         <h3 id="bayle">Bayle</h3>
-                        <div class="image-container">
-                            <img src="{{ url_for('static', filename='uploads/section5_image.jpg') }}" alt="Bayle Image">
-                        </div>
-                        <p>Put text here...</p>
-                        <!-- Image containers and spacing -->
-                        <div class="carousel">
-                            <div class="large-image">
-                                <img src="{{ url_for('static', filename='uploads/section5_large_image.jpg') }}" alt="Bayle Large Image">
+                        <div class="carousel" id="bayle-carousel">
+                            <div class="carousel-inner">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Bayle Image 1">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Bayle Image 2">
+                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Bayle Image 3">
                             </div>
+                            <div class="carousel-control">
+                                <button onclick="prevSlide('bayle-carousel')">&#10094;</button>
+                                <button onclick="nextSlide('bayle-carousel')">&#10095;</button>
+                            </div>
+                        </div>
+                        <div class="wiki-section">
+                            <h4>Overview</h4>
+                            <p>Bayle is known for his agility and deceptive attack patterns, making him a tricky opponent to face.</p>
+                            <h4>Strategies</h4>
+                            <ul>
+                                <li>Use defensive maneuvers and stay alert to predict his movements.</li>
+                                <li>Look for openings after he completes an attack sequence.</li>
+                                <li>Use high-speed and precision attacks to counter his deceptive tactics.</li>
+                            </ul>
+                            <h4>Weaknesses</h4>
+                            <ul>
+                                <li>Vulnerable to precise, high-speed attacks.</li>
+                                <li>Can be outmaneuvered with quick reflexes and careful observation.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -127,5 +251,71 @@
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for Carousels -->
+    <script>
+      // Initialize carousel
+document.addEventListener('DOMContentLoaded', () => {
+    const carousels = document.querySelectorAll('.carousel');
+
+    carousels.forEach(carousel => {
+        const inner = carousel.querySelector('.carousel-inner');
+        const slides = Array.from(inner.children);
+        
+        // Clone the first and last slides for seamless looping
+        const firstClone = slides[0].cloneNode(true);
+        const lastClone = slides[slides.length - 1].cloneNode(true);
+
+        inner.appendChild(firstClone);
+        inner.insertBefore(lastClone, slides[0]);
+
+        const slideCount = slides.length;
+        let currentIndex = 1; // Start from the first clone (real first image)
+        inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Function to show slide
+        function showSlide(index) {
+            if (index >= slideCount + 1) {
+                // Move to the real first slide
+                inner.style.transition = 'none';
+                inner.style.transform = `translateX(0)`;
+                currentIndex = 1;
+                setTimeout(() => {
+                    inner.style.transition = 'transform 0.5s ease-in-out';
+                    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 20); // Small delay to trigger transition
+            } else if (index < 0) {
+                // Move to the real last slide
+                inner.style.transition = 'none';
+                inner.style.transform = `translateX(-${(slideCount) * 100}%)`;
+                currentIndex = slideCount;
+                setTimeout(() => {
+                    inner.style.transition = 'transform 0.5s ease-in-out';
+                    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 20); // Small delay to trigger transition
+            } else {
+                inner.style.transform = `translateX(-${index * 100}%)`;
+                currentIndex = index;
+            }
+        }
+
+        // Previous slide
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        // Next slide
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        // Add event listeners for carousel controls
+        carousel.querySelector('.carousel-control button:nth-child(1)').addEventListener('click', prevSlide);
+        carousel.querySelector('.carousel-control button:nth-child(2)').addEventListener('click', nextSlide);
+    });
+});
+
+        
+    </script>
 </body>
 </html>
