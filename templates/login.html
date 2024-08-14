@@ -7,10 +7,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Link to external CSS stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Link to Google Fonts for a Hollow Knight-inspired font -->
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
     <!-- Title of the page that appears in the browser tab -->
-    <title>Login Form</title>
+    <title>Login Page</title>
+    <style>
+        /* Body styling with a dark background */
+        body {
+            background-color: #000; /* Black background */
+            color: white; /* White text */
+            margin: 0;
+            padding: 0;
+            font-family: 'Uncial Antiqua', serif; /* Hollow Knight-inspired font */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+
+
+        /* Styling for the page title */
+.page-title {
+    font-size: 96px; /* Increase the font size significantly */
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px; /* Increase letter spacing for dramatic effect */
+    animation: fadeIn 2s ease-in-out;
+    margin: 0; /* No margin */
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    z-index: 10;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8); /* Add shadow for depth */
+}
+
+
+        /* Simple fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Container for the form */
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #222; /* Dark background for the form */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin-top: 80px; /* Ensure it's placed below the title */
+        }
+
+        /* Form labels and inputs */
+        label {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #444; /* Darker button color */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #555; /* Slightly lighter on hover */
+        }
+
+        /* Link styling */
+        a {
+            color: #bbb;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            color: white;
+        }
+    </style>
 </head>
 <body>
+    <!-- Typing text animation for the title -->
+    <h1 class="page-title">Login Page</h1>
+
     <!-- Container div for centering and styling the form -->
     <div class="container">
         <!-- Form element to handle user login -->
