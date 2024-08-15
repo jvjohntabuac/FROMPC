@@ -36,11 +36,11 @@
        HALLOOOO!
     </div>
 </div>
-<!-- Sprite Image -->
 <img src="{{ url_for('static', filename='uploads/sprite.png') }}" alt="Sprite" id="sprite-img" class="sprite-img">
-
-<!-- Second Sprite Image -->
 <img src="{{ url_for('static', filename='uploads/sprite2.png') }}" alt="Sprite2" id="sprite2-img" class="sprite-img">
+
+
+
 
 <style>.area-title {
     position: fixed; /* Keeps it in place as the user scrolls */
@@ -61,6 +61,136 @@
 .area-title.show {
     opacity: 1;
     visibility: visible;
+}
+/* Chibi Image Container */
+.chibi-container {
+    position: fixed; /* Positioned fixed as you have */
+    bottom: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+/* Chibi Image */
+.chibi-img {
+    cursor: pointer; /* Indicate clickable */
+    width: 100px; /* Adjust size as needed */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Comic Popup Styles */
+.comic-popup {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position relative to the chibi container */
+    bottom: 100%; /* Position above the image */
+    left: 50%;
+    transform: translateX(-50%) translateX(-10px); /* Adjusted to shift text left */
+    background-color: #ffb6c1; /* Light pink background color */
+    border: 2px solid #ff69b4; /* Hot pink border color */
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px; /* Adjust width as needed */
+    z-index: 1001; /* Ensure it appears above other content */
+    font-size: 14px;
+    color: #ff1493; /* Deep pink text color */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3); /* Shadow for better visibility */
+}
+
+
+.comic-arrow::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #ff69b4; /* Border color of the popup */
+    transform: translateY(-100%);
+}
+
+/* Chibi Thumbnail (if used) */
+.chibi-thumbnail {
+    width: 50px; /* Adjust thumbnail size as needed */
+    height: 50px; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure image covers the thumbnail area */
+    margin: 5px; /* Adjust spacing around the thumbnail */
+}
+
+/* Jump Animation on Hover */
+.chibi-container:hover .chibi-img {
+    animation: jump 0.3s forwards; /* Apply the animation on hover, play once */
+}
+
+/* Jump Animation */
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-40px); /* Adjust jump height as needed */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.sprite-img {
+    position: fixed;
+    bottom: 20px; /* Adjust as needed */
+    right: 0; /* Move to the right side of the screen */
+    width: 30%; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: none; /* Initially hidden */
+    z-index: 802; /* Ensure it appears above other content */
+    transition: all 0.3s ease; /* Smooth transition for appearance changes */
+}
+
+
+
+/* Style for Showing the Sprite */
+.sprite-img.show {
+    opacity: 1; /* Make sprite visible */
+}
+
+
+
+/* Hide Text Box */
+.text-box.hidden {
+    display: none; /* Hide the text box */
+}
+
+/* Text Box Styles */
+#text-box {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 300px;
+    padding: 15px;
+    background-color: #111;
+    color: #ffffff;
+    font-family: "Courier New", Courier, monospace;
+    border: 2px solid #ea00ff;
+    border-radius: 10px;
+    display: none; /* Hidden initially */
+    z-index: 1000;
+    white-space: pre-wrap; /* Preserve spaces and line breaks */
+}
+
+/* Terminal Cursor Animation */
+#text-box::after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    background-color: #00ff00;
+    margin-left: 5px;
+    animation: blink 0.5s step-end infinite; /* Adjust the duration for faster blinking */
+}
+
+@keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
 }
 </style>
 
@@ -149,110 +279,114 @@ setTimeout(function() {
         
         let clickCount = 0;
         let spriteClickCount = 0; // Counter for sprite clicks
-        const messages = [
-            "Welcome to our website! We're excited to have you join our community. Explore our content, discover new features, and feel free to reach out if you need any assistance. Enjoy your visit!",
-            "dafyavfadfvday",
-            "dafyavfadfvday",
-            "dafyavfadfvday",
-        ];
-   
 
-        
-        function typeText(element, text, callback) {
-            clearInterval(typingInterval); // Clear any previous typing intervals
-            element.textContent = ""; // Ensure the text box is cleared before typing
-            let index = 0;
-            typingInterval = setInterval(() => {
-                element.textContent += text[index];
-                index++;
-                if (index === text.length) {
-                    clearInterval(typingInterval);
-                    if (callback) callback();
-                }
-            }, 50); // Typing speed (lower value = faster typing)
+// Messages for sprite1 and sprite2
+const messagesSprite1 = [
+    "Welcome to our website! We're excited to have you join our community. Explore our content, discover new features, and feel free to reach out if you need any assistance. Enjoy your visit!",
+    "dafyavfadfvday",
+    "dafyavfadfvday",
+    "dafyavfadfvday",
+];
+
+const messagesSprite2 = [
+    "This is sprite 2. New adventures await!",
+    "Keep exploring and enjoy the journey.",
+    "Sprite 2 has its own set of messages.",
+    "Thanks for visiting!"
+];
+
+function typeText(element, text, callback) {
+    clearInterval(typingInterval); // Clear any previous typing intervals
+    element.textContent = ""; // Ensure the text box is cleared before typing
+    let index = 0;
+    typingInterval = setInterval(() => {
+        element.textContent += text[index];
+        index++;
+        if (index === text.length) {
+            clearInterval(typingInterval);
+            if (callback) callback();
         }
-        
-        function handleChibiClick() {
-            clickCount++;
-            const popup = document.getElementById("comic-popup");
-            const sprite = document.getElementById("sprite-img");
-            const chibi = document.querySelector(".chibi-img");
-            const textBox = document.getElementById("text-box");
-        
-            if (clickCount === 1) {
-                popup.style.display = "block";
-            } else if (clickCount === 2) {
-                popup.style.display = "none";
-                sprite.style.display = "block";
-                sprite.src = "{{ url_for('static', filename='uploads/sprite.png') }}"; // Load initial sprite
-                chibi.style.display = "none"; // Hide chibi image
-                textBox.style.display = "block"; // Show text box
-                typeText(textBox, messages[0]); // Start typing the first message
-                spriteClickCount = 0; // Reset sprite click count
-            }
-        }
-        
-        function handleSpriteClick() {
-            spriteClickCount++;
-            const sprite = document.getElementById("sprite-img");
-            const textBox = document.getElementById("text-box");
-        
-            if (spriteClickCount === 1) {
-                sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}"; // Change sprite image
-                sprite.style.right = "0"; // Move sprite to the right side
-                sprite.style.width = "50%"; // Adjust size
-                textBox.classList.add("hidden"); // Hide text box
-                document.removeEventListener('click', handleDocumentClick); // Remove click event listener
+    }, 20); // Typing speed (lower value = faster typing)
+}
+
+function handleChibiClick() {
+    clickCount++;
+    const popup = document.getElementById("comic-popup");
+    const sprite = document.getElementById("sprite-img");
+    const chibi = document.querySelector(".chibi-img");
+    const textBox = document.getElementById("text-box");
+
+    if (clickCount === 1) {
+        popup.style.display = "block";
+    } else if (clickCount === 2) {
+        popup.style.display = "none";
+        sprite.style.display = "block";
+        sprite.src = "{{ url_for('static', filename='uploads/sprite.png') }}"; // Load initial sprite
+        chibi.style.display = "none"; // Hide chibi image
+        textBox.style.display = "block"; // Show text box
+        typeText(textBox, messagesSprite1[0]); // Start typing the first message for sprite1
+        spriteClickCount = 0; // Reset sprite click count
+    }
+}
+
+function handleSpriteClick() {
+    spriteClickCount++;
+    const sprite = document.getElementById("sprite-img");
+    const textBox = document.getElementById("text-box");
+
+    if (spriteClickCount === 1) {
+        // Transition to sprite2
+        sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}";
+        sprite.classList.add("active"); // Apply new size from CSS
+        textBox.classList.add("hidden"); // Hide text box initially
+        document.removeEventListener('click', handleDocumentClick); // Remove event listener for document clicks
+    } else {
+        // Display messages for sprite2
+        if (sprite.src.includes('sprite2.png')) {
+            const currentMessage = messagesSprite2[spriteClickCount - 2]; // Adjust index for messages
+            if (currentMessage) {
+                textBox.classList.remove("hidden"); // Ensure text box is visible
+                textBox.textContent = ""; // Clear text box before typing the next message
+                typeText(textBox, currentMessage);
             } else {
-                const currentMessage = messages[spriteClickCount];
-                if (currentMessage) {
-                    textBox.textContent = ""; // Clear text box before typing the next message
-                    typeText(textBox, currentMessage); // Start typing the next message
-                }
+                textBox.textContent = "No more messages for sprite2."; // Indicate end of messages
+            }
+        } else {
+            // Display messages for sprite1 if sprite2 is not active yet
+            const currentMessage = messagesSprite1[spriteClickCount - 2]; // Adjust index for messages
+            if (currentMessage) {
+                textBox.classList.remove("hidden"); // Ensure text box is visible
+                textBox.textContent = ""; // Clear text box before typing the next message
+                typeText(textBox, currentMessage);
+            } else {
+                textBox.textContent = "No more messages for sprite1."; // Indicate end of messages
             }
         }
-        
-        function handleDocumentClick() {
-            const textBox = document.getElementById("text-box");
-            
-            if (textBox.style.display === "block") {
-                const currentMessage = textBox.textContent.trim(); // Trim spaces and newlines
-                const nextMessageIndex = messages.indexOf(currentMessage) + 1;
-                
-                if (nextMessageIndex < messages.length) {
-                    textBox.textContent = ""; // Clear text box before typing the next message
-                    typeText(textBox, messages[nextMessageIndex]); // Start typing the next message
-                } else {
-                    textBox.textContent += " [End of messages]"; // Indicate end of messages if desired
-                }
-            }
-        }
-        function typeText(element, text, callback) {
-            clearInterval(typingInterval); // Clear any previous typing intervals
-            element.textContent = ""; // Ensure the text box is cleared before typing
-            let index = 0;
-            typingInterval = setInterval(() => {
-                element.textContent += text[index];
-                index++;
-                if (index === text.length) {
-                    clearInterval(typingInterval);
-                    if (callback) callback();
-                }
-            }, 20); // Typing speed (lower value = faster typing)
-        }
-        
-        
-        
-        // Attach the click event to the chibi image
-        document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
-        
-        // Attach the click event to the sprite image
-        document.getElementById("sprite-img").addEventListener("click", handleSpriteClick);
+    }
+}
 
+function handleDocumentClick() {
+    const textBox = document.getElementById("text-box");
+    
+    if (textBox.style.display === "block") {
+        const currentMessage = textBox.textContent.trim(); // Trim spaces and newlines
+        let messagesArray = sprite.src.includes('sprite2.png') ? messagesSprite2 : messagesSprite1;
+        const nextMessageIndex = messagesArray.indexOf(currentMessage) + 1;
         
-        
-        // Attach the click event to the document
-        document.addEventListener('click', handleDocumentClick);
+        if (nextMessageIndex < messagesArray.length) {
+            textBox.textContent = ""; // Clear text box before typing the next message
+            typeText(textBox, messagesArray[nextMessageIndex]); // Start typing the next message
+        } else {
+            textBox.textContent += " [End of messages]"; // Indicate end of messages if desired
+        }
+    }
+}
+
+// Attach event listeners
+document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
+document.getElementById("sprite-img").addEventListener("click", handleSpriteClick);
+document.addEventListener('click', handleDocumentClick);
+
         
    
         
