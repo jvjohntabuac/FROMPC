@@ -10,6 +10,12 @@
     </div>
     
     <style>
+
+
+.sprite3-img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
         /* Apply white color to all headings and paragraphs */
         h1, h2, h3, h4, h5, h6, p, li {
             color: white;
@@ -74,6 +80,50 @@
             opacity: 1;
             visibility: visible;
         }
+        .sprite3-container {
+            position: fixed;
+            bottom: 20px; /* Adjust distance from the bottom */
+            right: 20px;  /* Adjust distance from the right */
+            z-index: 1000; /* Keeps it on top of other content */
+        }
+
+        .sprite3-img {
+            width: 100px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        
+   /* Hide Text Box */
+.text-box.hidden {
+    display: none; /* Hide the text box */
+}
+
+/* Text Box Styles */
+#text-box {
+    position: fixed; /* Use fixed positioning to keep it in place */
+    top: 10%; /* Distance from the top of the page */
+    right: 10%; /* Distance from the right edge of the page */
+    width: 300px; /* Width of the text box */
+    padding: 15px; /* Padding inside the text box */
+    background-color: #111; /* Background color */
+    color: #ffffff; /* Text color */
+    font-family: "Courier New", Courier, monospace; /* Font style */
+    border: 2px solid #ea00ff; /* Border color */
+    border-radius: 10px; /* Rounded corners */
+    display: none; /* Hidden initially */
+    z-index: 1000; /* Ensure it appears above other elements */
+    white-space: pre-wrap; /* Preserve spaces and line breaks */
+    pointer-events: auto; /* Enable interaction with the text box */
+}
+
+
+
+
+
+
+
+
+
+
         
     </style>
 </head>
@@ -85,10 +135,15 @@
         </a>
     </div>
 
-    <!-- Animated PNG -->
-    <div class="chibi-container">
-        <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Chibi Character" class="chibi-img">
+    
+    <div class="sprite3-container">
+        <img src="{{ url_for('static', filename='uploads/sprite3.png') }}" alt="Sprite 3" class="sprite3-img">
     </div>
+   
+
+
+
+
 
     <!-- Main Content -->
     <div class="main-content container">
@@ -260,19 +315,20 @@
                 </div>
             </div>
 
-            <!-- Dropdown Navigation -->
-            <div class="col-md-3">
-                <div class="dropdown-navigation">
-                    <h3>Guide Sections</h3>
-                    <select class="custom-select" onchange="location = this.value;">
-                        <option value="" selected>Choose a section</option>
-                        <option value="#dancing-lion">Dancing Lion</option>
-                        <option value="#renalla">Renalla</option>
-                        <option value="#messmer">Messmer</option>
-                        <option value="#gaius">Gaius</option>
-                        <option value="#bayle">Bayle</option>
-                    </select>
-                </div>
+             <!-- Text Box with Dropdown Navigation -->
+    <div id="text-box" class="text-box hidden">
+        <div class="text-box-content">
+            <h3>Guide Sections</h3>
+            <select class="custom-select" onchange="location = this.value;">
+                <option value="" selected>Choose a section</option>
+                <option value="#dancing-lion">Dancing Lion</option>
+                <option value="#renalla">Renalla</option>
+                <option value="#messmer">Messmer</option>
+                <option value="#gaius">Gaius</option>
+                <option value="#bayle">Bayle</option>
+            </select>
+          
+        </div>
             </div>
         </div>
     </div>
@@ -353,6 +409,36 @@ function showAreaTitle() {
 // Trigger the function when the page loads or when the user enters a specific section
 window.onload = showAreaTitle;
 
+// script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const sprite3 = document.querySelector('.sprite3-img');
+    const textBox = document.getElementById('text-box');
+
+    // Function to toggle the visibility of the text box
+    function toggleTextBox() {
+        if (textBox.classList.contains('hidden')) {
+            textBox.classList.remove('hidden');
+            textBox.style.display = 'block'; // Make it visible
+        } else {
+            textBox.classList.add('hidden');
+            textBox.style.display = 'none'; // Hide it
+        }
+    }
+
+    // Add click event listener to the sprite
+    sprite3.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevents the event from bubbling up and affecting other elements
+        toggleTextBox();
+    });
+
+    // Optional: Handle clicks outside of the text box to hide it
+    document.addEventListener('click', (event) => {
+        if (!textBox.contains(event.target) && !sprite3.contains(event.target)) {
+            textBox.classList.add('hidden');
+            textBox.style.display = 'none'; // Hide text box when clicking outside
+        }
+    });
+});
 
         
     </script>

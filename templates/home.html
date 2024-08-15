@@ -264,128 +264,88 @@ setTimeout(function() {
         }
         
         window.onload = function() {
-            makeDraggable(document.getElementById("comic-popup"));
-        }
-        
-        let debounceTimeout;
-        let typingInterval;
-        
-        function debounce(func, delay) {
-            return function(...args) {
-                clearTimeout(debounceTimeout);
-                debounceTimeout = setTimeout(() => func.apply(this, args), delay);
-            };
-        }
-        
-        let clickCount = 0;
-        let spriteClickCount = 0; // Counter for sprite clicks
+    let typingInterval;
+    let clickCount = 0;
+    let spriteClickCount = 0; // Counter for sprite clicks
 
-// Messages for sprite1 and sprite2
-const messagesSprite1 = [
-    "Welcome to our website! We're excited to have you join our community. Explore our content, discover new features, and feel free to reach out if you need any assistance. Enjoy your visit!",
-    "dafyavfadfvday",
-    "dafyavfadfvday",
-    "dafyavfadfvday",
-];
+    // Messages for sprite1 and sprite2
+    const messagesSprite1 = [
+        "Hello! Ready for an adventure?",
+        "There's so much to explore.",
+        "Keep going, the journey's just begun!",
+    ];
 
-const messagesSprite2 = [
-    "This is sprite 2. New adventures await!",
-    "Keep exploring and enjoy the journey.",
-    "Sprite 2 has its own set of messages.",
-    "Thanks for visiting!"
-];
+    const messagesSprite2 = [
+        "Welcome to the next level!",
+        "You're doing great, keep it up!",
+        "Thanks for sticking with us!",
+        "See you next time!"
+    ];
 
-function typeText(element, text, callback) {
-    clearInterval(typingInterval); // Clear any previous typing intervals
-    element.textContent = ""; // Ensure the text box is cleared before typing
-    let index = 0;
-    typingInterval = setInterval(() => {
-        element.textContent += text[index];
-        index++;
-        if (index === text.length) {
-            clearInterval(typingInterval);
-            if (callback) callback();
-        }
-    }, 20); // Typing speed (lower value = faster typing)
-}
-
-function handleChibiClick() {
-    clickCount++;
-    const popup = document.getElementById("comic-popup");
-    const sprite = document.getElementById("sprite-img");
-    const chibi = document.querySelector(".chibi-img");
-    const textBox = document.getElementById("text-box");
-
-    if (clickCount === 1) {
-        popup.style.display = "block";
-    } else if (clickCount === 2) {
-        popup.style.display = "none";
-        sprite.style.display = "block";
-        sprite.src = "{{ url_for('static', filename='uploads/sprite.png') }}"; // Load initial sprite
-        chibi.style.display = "none"; // Hide chibi image
-        textBox.style.display = "block"; // Show text box
-        typeText(textBox, messagesSprite1[0]); // Start typing the first message for sprite1
-        spriteClickCount = 0; // Reset sprite click count
-    }
-}
-
-function handleSpriteClick() {
-    spriteClickCount++;
-    const sprite = document.getElementById("sprite-img");
-    const textBox = document.getElementById("text-box");
-
-    if (spriteClickCount === 1) {
-        // Transition to sprite2
-        sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}";
-        sprite.classList.add("active"); // Apply new size from CSS
-        textBox.classList.add("hidden"); // Hide text box initially
-        document.removeEventListener('click', handleDocumentClick); // Remove event listener for document clicks
-    } else {
-        // Display messages for sprite2
-        if (sprite.src.includes('sprite2.png')) {
-            const currentMessage = messagesSprite2[spriteClickCount - 2]; // Adjust index for messages
-            if (currentMessage) {
-                textBox.classList.remove("hidden"); // Ensure text box is visible
-                textBox.textContent = ""; // Clear text box before typing the next message
-                typeText(textBox, currentMessage);
-            } else {
-                textBox.textContent = "No more messages for sprite2."; // Indicate end of messages
+    function typeText(element, text, callback) {
+        clearInterval(typingInterval); // Clear any previous typing intervals
+        element.textContent = ""; // Ensure the text box is cleared before typing
+        let index = 0;
+        typingInterval = setInterval(() => {
+            element.textContent += text[index];
+            index++;
+            if (index === text.length) {
+                clearInterval(typingInterval);
+                if (callback) callback();
             }
-        } else {
-            // Display messages for sprite1 if sprite2 is not active yet
-            const currentMessage = messagesSprite1[spriteClickCount - 2]; // Adjust index for messages
-            if (currentMessage) {
-                textBox.classList.remove("hidden"); // Ensure text box is visible
-                textBox.textContent = ""; // Clear text box before typing the next message
-                typeText(textBox, currentMessage);
-            } else {
-                textBox.textContent = "No more messages for sprite1."; // Indicate end of messages
-            }
+        }, 20); // Typing speed (lower value = faster typing)
+    }
+
+    function handleChibiClick() {
+        clickCount++;
+        const popup = document.getElementById("comic-popup");
+        const sprite = document.getElementById("sprite-img");
+        const chibi = document.querySelector(".chibi-img");
+        const textBox = document.getElementById("text-box");
+
+        if (clickCount === 1) {
+            popup.style.display = "block";
+        } else if (clickCount === 2) {
+            popup.style.display = "none";
+            sprite.style.display = "block";
+            sprite.src = "{{ url_for('static', filename='uploads/sprite.png') }}"; // Load initial sprite
+            chibi.style.display = "none"; // Hide chibi image
+            textBox.style.display = "block"; // Show text box
+            typeText(textBox, messagesSprite1[0]); // Start typing the first message for sprite1
+            spriteClickCount = 0; // Reset sprite click count
         }
     }
-}
 
-function handleDocumentClick() {
-    const textBox = document.getElementById("text-box");
-    
-    if (textBox.style.display === "block") {
-        const currentMessage = textBox.textContent.trim(); // Trim spaces and newlines
-        let messagesArray = sprite.src.includes('sprite2.png') ? messagesSprite2 : messagesSprite1;
-        const nextMessageIndex = messagesArray.indexOf(currentMessage) + 1;
-        
-        if (nextMessageIndex < messagesArray.length) {
-            textBox.textContent = ""; // Clear text box before typing the next message
-            typeText(textBox, messagesArray[nextMessageIndex]); // Start typing the next message
+    function handleSpriteClick() {
+        spriteClickCount++;
+        const sprite = document.getElementById("sprite-img");
+        const textBox = document.getElementById("text-box");
+
+        if (spriteClickCount <= messagesSprite1.length) {
+            const currentMessage = messagesSprite1[spriteClickCount - 1]; // Show messages for sprite1
+            typeText(textBox, currentMessage);
+        } else if (spriteClickCount === messagesSprite1.length + 1) {
+            // Transition to sprite2 after the last message of sprite1
+            sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}";
+            sprite.classList.add("active"); // Apply new size from CSS
+            textBox.classList.add("hidden"); // Hide text box initially
+        } else if (spriteClickCount <= messagesSprite1.length + messagesSprite2.length + 1) {
+            const currentMessage = messagesSprite2[spriteClickCount - messagesSprite1.length - 2]; // Show messages for sprite2
+            textBox.classList.remove("hidden"); // Ensure text box is visible
+            typeText(textBox, currentMessage);
         } else {
-            textBox.textContent += " [End of messages]"; // Indicate end of messages if desired
+            // Hide sprite2 and reset to chibi after all messages are shown
+            sprite.style.display = "none";
+            document.querySelector(".chibi-img").style.display = "block"; // Show chibi again
+            textBox.style.display = "none"; // Hide text box
+            clickCount = 0; // Reset click count for chibi
         }
     }
-}
 
-// Attach event listeners
-document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
-document.getElementById("sprite-img").addEventListener("click", handleSpriteClick);
-document.addEventListener('click', handleDocumentClick);
+    // Attach event listeners
+    document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
+    document.getElementById("sprite-img").addEventListener("click", handleSpriteClick);
+};
 
         
    
