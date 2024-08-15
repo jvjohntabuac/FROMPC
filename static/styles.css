@@ -782,9 +782,6 @@ body {
     50% { opacity: 0; }
 }
 
-.text-box {
-    animation: typing 0.1s steps(22) 1 normal both; /* Even faster typing */
-}
 
 
 
