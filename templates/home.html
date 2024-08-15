@@ -235,6 +235,18 @@
 
     <!-- JavaScript -->
     <script>
+
+
+
+    let debounceTimeout;
+    let typingInterval;
+
+    function debounce(func, delay) {
+        return function(...args) {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
         // Show the title
 document.getElementById('area-title').classList.add('show');
 
