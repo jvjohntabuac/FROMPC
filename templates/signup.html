@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>Create Account</title>
+    <style>
+   
+.container {
+    color: white; /* Set default text color to white */
+}
+
+
+.container input,
+.container textarea,
+.container select {
+    color: white; /* Text color inside input fields */
+    background-color: #333; /* Background color of input fields for better contrast */
+    border: 1px solid #555; /* Border color for input fields */
+}
+
+
+.container input::placeholder {
+    color: #ccc; /* Lighter color for placeholder text */
+}
+
+    </style>
     <script>
         function validatePassword() {
             var password = document.getElementById("newpsw").value;
@@ -65,32 +86,5 @@
             <button type="submit">Create Account</button>
         </div>
     </form>
-    <style>
-        .container {
-            /* Other container styles (if any) */
-        }
-        
-        /* Set the text color for input fields within the container */
-        .container input {
-            color: white; /* Text color for input fields */
-            background-color: white; /* Background color for input fields */
-            border: 1px solid #ccc; /* Optional: Add border */
-            padding: 10px; /* Optional: Add some padding */
-            width: 100%; /* Optional: Full width */
-            box-sizing: border-box; /* Optional: Include padding in width */
-        }
-        
-       
-        
-        .container button {
-            color: white; /* Set button text color to white */
-            padding: 10px; /* Add padding */
-            border: none; /* Remove border */
-            cursor: pointer; /* Change cursor on hover */
-        }
-        
-       
-        
-         </style>
 </body>
 </html>
