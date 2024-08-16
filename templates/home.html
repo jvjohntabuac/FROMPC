@@ -282,31 +282,37 @@ setTimeout(function() {
 
     // Messages for sprite1 and sprite2
     const messagesSprite1 = [
-        "Hello! Ready for an adventure?",
-        "There's so much to explore.",
-        "Keep going, the journey's just begun!",
+        "...:)",
+        "Hello!",
+        "Welcome to the Elden ring DLC blog website.",
+        "Created by John Tabuac for his Digital Technologies project",
+        "Ohh by the way, for disclamers",
     ];
 
     const messagesSprite2 = [
-        "Welcome to the next level!",
-        "You're doing great, keep it up!",
-        "Thanks for sticking with us!",
-        "See you next time!"
+        "The images including this one John used for my model are not owned by him, the image I used are from the creator named DanSalvado.",
+        "In addition to that the content used on this website are from the company called fromsoftwere which created the game itself.",
+        "So that's about it, you can find the other pages on your top left",
+        "Enjoy your stay!!!"
     ];
 
     function typeText(element, text, callback) {
-        clearInterval(typingInterval); // Clear any previous typing intervals
-        element.textContent = ""; // Ensure the text box is cleared before typing
-        let index = 0;
-        typingInterval = setInterval(() => {
-            element.textContent += text[index];
-            index++;
-            if (index === text.length) {
-                clearInterval(typingInterval);
-                if (callback) callback();
-            }
-        }, 20); // Typing speed (lower value = faster typing)
-    }
+    if (element.classList.contains("typing")) return; // Prevent re-typing
+
+    element.classList.add("typing");
+    clearInterval(typingInterval);
+    element.textContent = "";
+    let index = 0;
+    typingInterval = setInterval(() => {
+        element.textContent += text[index];
+        index++;
+        if (index === text.length) {
+            clearInterval(typingInterval);
+            element.classList.remove("typing");
+            if (callback) callback();
+        }
+    }, 20); // Typing speed
+}
 
     function handleChibiClick() {
         clickCount++;
@@ -329,30 +335,32 @@ setTimeout(function() {
     }
 
     function handleSpriteClick() {
-        spriteClickCount++;
-        const sprite = document.getElementById("sprite-img");
-        const textBox = document.getElementById("text-box");
+    spriteClickCount++;
+    const sprite = document.getElementById("sprite-img");
+    const textBox = document.getElementById("text-box");
 
-        if (spriteClickCount <= messagesSprite1.length) {
-            const currentMessage = messagesSprite1[spriteClickCount - 1]; // Show messages for sprite1
-            typeText(textBox, currentMessage);
-        } else if (spriteClickCount === messagesSprite1.length + 1) {
-            // Transition to sprite2 after the last message of sprite1
-            sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}";
-            sprite.classList.add("active"); // Apply new size from CSS
-            textBox.classList.add("hidden"); // Hide text box initially
-        } else if (spriteClickCount <= messagesSprite1.length + messagesSprite2.length + 1) {
-            const currentMessage = messagesSprite2[spriteClickCount - messagesSprite1.length - 2]; // Show messages for sprite2
-            textBox.classList.remove("hidden"); // Ensure text box is visible
-            typeText(textBox, currentMessage);
-        } else {
-            // Hide sprite2 and reset to chibi after all messages are shown
-            sprite.style.display = "none";
-            document.querySelector(".chibi-img").style.display = "block"; // Show chibi again
-            textBox.style.display = "none"; // Hide text box
-            clickCount = 0; // Reset click count for chibi
-        }
+    // Check if typing is already in progress
+    if (textBox.classList.contains("typing")) return;
+
+    if (spriteClickCount <= messagesSprite1.length) {
+        const currentMessage = messagesSprite1[spriteClickCount - 1];
+        typeText(textBox, currentMessage);
+    } else if (spriteClickCount === messagesSprite1.length + 1) {
+        sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}";
+        sprite.classList.add("active");
+        textBox.classList.add("hidden");
+    } else if (spriteClickCount <= messagesSprite1.length + messagesSprite2.length + 1) {
+        const currentMessage = messagesSprite2[spriteClickCount - messagesSprite1.length - 2];
+        textBox.classList.remove("hidden");
+        typeText(textBox, currentMessage);
+    } else {
+        sprite.style.display = "none";
+        document.querySelector(".chibi-img").style.display = "block";
+        textBox.style.display = "none";
+        clickCount = 0;
     }
+}
+
 
     // Attach event listeners
     document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
