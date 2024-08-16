@@ -1,43 +1,55 @@
-                                                                                                                                                                                                                                                                                                                <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for the HTML document -->
     <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Area Title: Displays the title of the page -->
     <div class="area-title" id="area-title">
         <h1>Home</h1>
     </div>
     
+    <!-- Link to the external stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Link to Tailwind CSS from CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Meta tag for CSRF token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
-    <!-- Navbar Toggle Button -->
+    <!-- Navbar Toggle Button: Opens the sidebar when clicked -->
     <button onclick="toggleNavbar()" id="nav-toggle" class="nav-toggle">☰</button>
 
-    <!-- Sidebar Navbar -->
+    <!-- Sidebar Navbar: Contains navigation links and logout button -->
     <div id="navbar" class="navbar">
+        <!-- Close button for the sidebar -->
         <button onclick="closeNavbar()" class="nav-close">×</button>
         <ul>
+            <!-- Navigation links -->
             <li><a href="/create_post" class="block py-2 px-4 hover:bg-gray-600">Create a New Post</a></li>
             <li><a href="/DLC" class="block py-2 px-4 hover:bg-gray-600">DLC</a></li>
             <li><a href="/profile" class="block py-2 px-4 hover:bg-gray-600">Profile</a></li>
         </ul>
+        <!-- Logout button -->
         <a href="/logout" class="logout-button block py-2 px-4 mt-4 bg-red-600 hover:bg-red-800 text-center">Logout</a>
     </div>
 
-    <!-- Chibi Container -->
-<div class="chibi-container">
-   <!-- Chibi Container -->
-<div class="chibi-container">
-    <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Chibi Character" class="chibi-img" onclick="handleChibiClick()">
-    <div id="comic-popup" class="comic-popup">
-        <div class="comic-arrow"></div>
-       HALLOOOO!
+    <!-- Chibi Container: Contains chibi image and sprite images -->
+    <div class="chibi-container">
+        <!-- Chibi Image: Clickable to trigger an action -->
+        <img src="{{ url_for('static', filename='uploads/chibi.png') }}" alt="Chibi Character" class="chibi-img" onclick="handleChibiClick()">
+        <!-- Comic Popup: Displays a message when the chibi image is clicked -->
+        <div id="comic-popup" class="comic-popup">
+            <div class="comic-arrow"></div>
+            HALLOOOO!
+        </div>
     </div>
-</div>
-<img src="{{ url_for('static', filename='uploads/sprite.png') }}" alt="Sprite" id="sprite-img" class="sprite-img">
-<img src="{{ url_for('static', filename='uploads/sprite2.png') }}" alt="Sprite2" id="sprite2-img" class="sprite-img">
+
+    <!-- Sprite Images: Additional images for visual effects -->
+    <img src="{{ url_for('static', filename='uploads/sprite.png') }}" alt="Sprite" id="sprite-img" class="sprite-img">
+    <img src="{{ url_for('static', filename='uploads/sprite2.png') }}" alt="Sprite2" id="sprite2-img" class="sprite-img">
 
 
 
@@ -235,50 +247,55 @@
 
     <!-- JavaScript -->
     <script>
+// Variables for debounce and typing intervals
+let debounceTimeout;
+let typingInterval;
 
+// Debounce function to limit the rate at which a function is executed
+function debounce(func, delay) {
+    return function(...args) {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}
 
-
-    let debounceTimeout;
-    let typingInterval;
-
-    function debounce(func, delay) {
-        return function(...args) {
-            clearTimeout(debounceTimeout);
-            debounceTimeout = setTimeout(() => func.apply(this, args), delay);
-        };
-    }
-        // Show the title
+// Show the title by adding the 'show' class
 document.getElementById('area-title').classList.add('show');
 
-// Fade out the title after 5 seconds (5000 milliseconds)
+// Fade out the title after 3 seconds
 setTimeout(function() {
     document.getElementById('area-title').classList.remove('show');
 }, 3000);
 
+// Toggle the visibility of the comic popup
+function togglePopup() {
+    var popup = document.getElementById("comic-popup");
+    // Toggle between showing and hiding the popup
+    popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
+}
 
-        function togglePopup() {
-            var popup = document.getElementById("comic-popup");
-            popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
-        }
-        
-        function toggleSprite() {
-            var popup = document.getElementById("comic-popup");
-            var sprite = document.getElementById("sprite-img"); // Ensure the ID matches
-        
-            if (popup.style.display === "none" || popup.style.display === "") {
-                popup.style.display = "block";
-            } else if (sprite.style.display === "none" || sprite.style.display === "") {
-                sprite.style.display = "block";
-                setTimeout(function() {
-                    sprite.classList.add("show");
-                }, 10); // Add a slight delay for the transition effect
-            }
-        }
-        
-        window.onload = function() {
-    let typingInterval;
-    let clickCount = 0;
-    let spriteClickCount = 0; // Counter for sprite clicks
+// Toggle the visibility of the comic popup and sprite image
+function toggleSprite() {
+    var popup = document.getElementById("comic-popup");
+    var sprite = document.getElementById("sprite-img"); // Ensure this ID matches the sprite element
+
+    // Show popup if it's hidden
+    if (popup.style.display === "none" || popup.style.display === "") {
+        popup.style.display = "block";
+    } 
+    // Show sprite image if popup is visible
+    else if (sprite.style.display === "none" || sprite.style.display === "") {
+        sprite.style.display = "block";
+        setTimeout(function() {
+            sprite.classList.add("show");
+        }, 10); // Delay to allow transition effect
+    }
+}
+
+// Initialize when the window loads
+window.onload = function() {
+    let clickCount = 0; // Counter for clicks on the chibi image
+    let spriteClickCount = 0; // Counter for clicks on the sprite image
 
     // Messages for sprite1 and sprite2
     const messagesSprite1 = [
@@ -286,34 +303,36 @@ setTimeout(function() {
         "Hello!",
         "Welcome to the Elden ring DLC blog website.",
         "Created by John Tabuac for his Digital Technologies project",
-        "Ohh by the way, for disclamers",
+        "Ohh by the way, for disclaimers",
     ];
 
     const messagesSprite2 = [
         "The images including this one John used for my model are not owned by him, the image I used are from the creator named DanSalvado.",
-        "In addition to that the content used on this website are from the company called fromsoftwere which created the game itself.",
+        "In addition to that the content used on this website are from the company called FromSoftware which created the game itself.",
         "So that's about it, you can find the other pages on your top left",
         "Enjoy your stay!!!"
     ];
 
+    // Function to type text into an element with animation
     function typeText(element, text, callback) {
-    if (element.classList.contains("typing")) return; // Prevent re-typing
+        if (element.classList.contains("typing")) return; // Prevent re-typing
 
-    element.classList.add("typing");
-    clearInterval(typingInterval);
-    element.textContent = "";
-    let index = 0;
-    typingInterval = setInterval(() => {
-        element.textContent += text[index];
-        index++;
-        if (index === text.length) {
-            clearInterval(typingInterval);
-            element.classList.remove("typing");
-            if (callback) callback();
-        }
-    }, 20); // Typing speed
-}
+        element.classList.add("typing");
+        clearInterval(typingInterval);
+        element.textContent = "";
+        let index = 0;
+        typingInterval = setInterval(() => {
+            element.textContent += text[index];
+            index++;
+            if (index === text.length) {
+                clearInterval(typingInterval);
+                element.classList.remove("typing");
+                if (callback) callback(); // Execute callback if provided
+            }
+        }, 20); // Speed of typing animation
+    }
 
+    // Handle click on the chibi image
     function handleChibiClick() {
         clickCount++;
         const popup = document.getElementById("comic-popup");
@@ -321,166 +340,194 @@ setTimeout(function() {
         const chibi = document.querySelector(".chibi-img");
         const textBox = document.getElementById("text-box");
 
+        // On first click, show the popup
         if (clickCount === 1) {
             popup.style.display = "block";
-        } else if (clickCount === 2) {
+        } 
+        // On second click, hide the popup and show the sprite image
+        else if (clickCount === 2) {
             popup.style.display = "none";
             sprite.style.display = "block";
             sprite.src = "{{ url_for('static', filename='uploads/sprite.png') }}"; // Load initial sprite
             chibi.style.display = "none"; // Hide chibi image
             textBox.style.display = "block"; // Show text box
-            typeText(textBox, messagesSprite1[0]); // Start typing the first message for sprite1
+            typeText(textBox, messagesSprite1[0]); // Start typing the first message
             spriteClickCount = 0; // Reset sprite click count
         }
     }
 
+    // Handle click on the sprite image
     function handleSpriteClick() {
-    spriteClickCount++;
-    const sprite = document.getElementById("sprite-img");
-    const textBox = document.getElementById("text-box");
+        spriteClickCount++;
+        const sprite = document.getElementById("sprite-img");
+        const textBox = document.getElementById("text-box");
 
-    // Check if typing is already in progress
-    if (textBox.classList.contains("typing")) return;
+        // If text is currently being typed, prevent further typing
+        if (textBox.classList.contains("typing")) return;
 
-    if (spriteClickCount <= messagesSprite1.length) {
-        const currentMessage = messagesSprite1[spriteClickCount - 1];
-        typeText(textBox, currentMessage);
-    } else if (spriteClickCount === messagesSprite1.length + 1) {
-        sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}";
-        sprite.classList.add("active");
-        textBox.classList.add("hidden");
-    } else if (spriteClickCount <= messagesSprite1.length + messagesSprite2.length + 1) {
-        const currentMessage = messagesSprite2[spriteClickCount - messagesSprite1.length - 2];
-        textBox.classList.remove("hidden");
-        typeText(textBox, currentMessage);
-    } else {
-        sprite.style.display = "none";
-        document.querySelector(".chibi-img").style.display = "block";
-        textBox.style.display = "none";
-        clickCount = 0;
+        // Display messages for sprite1
+        if (spriteClickCount <= messagesSprite1.length) {
+            const currentMessage = messagesSprite1[spriteClickCount - 1];
+            typeText(textBox, currentMessage);
+        } 
+        // Display sprite2 and hide text box after sprite1 messages
+        else if (spriteClickCount === messagesSprite1.length + 1) {
+            sprite.src = "{{ url_for('static', filename='uploads/sprite2.png') }}";
+            sprite.classList.add("active");
+            textBox.classList.add("hidden");
+        } 
+        // Display messages for sprite2
+        else if (spriteClickCount <= messagesSprite1.length + messagesSprite2.length + 1) {
+            const currentMessage = messagesSprite2[spriteClickCount - messagesSprite1.length - 2];
+            textBox.classList.remove("hidden");
+            typeText(textBox, currentMessage);
+        } 
+        // Final state: Hide sprite and show chibi image again
+        else {
+            sprite.style.display = "none";
+            document.querySelector(".chibi-img").style.display = "block";
+            textBox.style.display = "none";
+            clickCount = 0; // Reset click count
+        }
     }
-}
 
-
-    // Attach event listeners
+    // Attach event listeners to the chibi image and sprite
     document.querySelector(".chibi-img").addEventListener("click", handleChibiClick);
     document.getElementById("sprite-img").addEventListener("click", handleSpriteClick);
 };
-
         
    
         
 
-//NAVBAR
-        function toggleNavbar() {
-            const navbar = document.getElementById("navbar");
-            const navToggle = document.getElementById("nav-toggle");
-            navbar.classList.toggle("active");
-            navToggle.classList.toggle("hidden");
+     // NAVBAR
+// Function to toggle the navbar visibility and the nav toggle button
+function toggleNavbar() {
+    const navbar = document.getElementById("navbar");
+    const navToggle = document.getElementById("nav-toggle");
+    // Toggle the 'active' class on the navbar and 'hidden' class on the nav toggle button
+    navbar.classList.toggle("active");
+    navToggle.classList.toggle("hidden");
+}
 
-            
-        }
+// Function to close the navbar and reset the toggle button
+function closeNavbar() {
+    const navbar = document.getElementById("navbar");
+    const navToggle = document.getElementById("nav-toggle");
+    // Remove the 'active' class from the navbar and 'hidden' class from the nav toggle button
+    navbar.classList.remove("active");
+    navToggle.classList.remove("hidden");
 
-        function closeNavbar() {
-            const navbar = document.getElementById("navbar");
-            const navToggle = document.getElementById("nav-toggle");
-            navbar.classList.remove("active");
-            navToggle.classList.remove("hidden");
+    // Store the state of the navbar and nav toggle button in localStorage
+    localStorage.setItem("navbar_active", 'false');
+    localStorage.setItem("nav_toggle_hidden", 'false');
+}
 
-            localStorage.setItem("navbar_active", 'false');
-            localStorage.setItem("nav_toggle_hidden", 'false');
-        }
+// Initialize the navbar and like buttons when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById("navbar");
+    const navToggle = document.getElementById("nav-toggle");
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const navbar = document.getElementById("navbar");
-            const navToggle = document.getElementById("nav-toggle");
+    // Retrieve the saved state of the navbar and nav toggle button from localStorage
+    const isNavbarActive = localStorage.getItem("navbar_active") === 'true';
+    const isNavToggleHidden = localStorage.getItem("nav_toggle_hidden") === 'true';
 
-            const isNavbarActive = localStorage.getItem("navbar_active") === 'true';
-            const isNavToggleHidden = localStorage.getItem("nav_toggle_hidden") === 'true';
+    // Apply the saved state to the navbar and nav toggle button
+    if (isNavbarActive) {
+        navbar.classList.add("active");
+        navToggle.classList.add("hidden");
+    } else {
+        navbar.classList.remove("active");
+        navToggle.classList.remove("hidden");
+    }
 
-            if (isNavbarActive) {
-                navbar.classList.add("active");
-                navToggle.classList.add("hidden");
-            } else {
-                navbar.classList.remove("active");
-                navToggle.classList.remove("hidden");
-            }
+    // Select all like buttons and get the CSRF token from a meta tag
+    const likeButtons = document.querySelectorAll('.like-button');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            const likeButtons = document.querySelectorAll('.like-button');
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    // Iterate over each like button
+    likeButtons.forEach(button => {
+        const postId = button.getAttribute('data-post-id');
+        const likeCountElement = document.getElementById(`like-count-${postId}`);
 
-            likeButtons.forEach(button => {
-                const postId = button.getAttribute('data-post-id');
-                const likeCountElement = document.getElementById(`like-count-${postId}`);
-
-                fetch(`/get_like_count?post_id=${postId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            console.error('Error fetching like count:', data.error);
-                            return;
-                        }
-                        likeCountElement.textContent = data.like_count;
-                    })
-                    .catch(error => console.error('Error fetching like count:', error));
-
-                button.addEventListener('click', (event) => {
-                    debouncedToggleLike(event, postId);
-                });
-            });
-        });
-
-        function toggleLike(event, postId) {
-            event.preventDefault();
-            const likeButton = document.getElementById(`like-button-${postId}`);
-            const likeCountElement = document.getElementById(`like-count-${postId}`);
-            let currentLikeCount = parseInt(likeCountElement.textContent, 10);
-            const isLiked = likeButton.classList.contains('liked');
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-            likeButton.disabled = true;
-
-            if (isLiked) {
-                currentLikeCount -= 1;
-                likeButton.classList.remove('liked');
-            } else {
-                currentLikeCount += 1;
-                likeButton.classList.add('liked');
-            }
-
-            likeCountElement.textContent = currentLikeCount;
-
-            fetch('/like_post', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-CSRFToken': csrfToken
-                },
-                body: new URLSearchParams({ post_id: postId }).toString(),
-            })
+        // Fetch the initial like count for the post
+        fetch(`/get_like_count?post_id=${postId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
-                    console.error('Error updating like state on server:', data.error);
-                    if (isLiked) {
-                        currentLikeCount += 1;
-                        likeButton.classList.add('liked');
-                    } else {
-                        currentLikeCount -= 1;
-                        likeButton.classList.remove('liked');
-                    }
-                    likeCountElement.textContent = currentLikeCount;
+                    console.error('Error fetching like count:', data.error);
+                    return;
                 }
+                likeCountElement.textContent = data.like_count;
             })
-            .catch(error => {
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                likeButton.disabled = false;
-            });
-        }
+            .catch(error => console.error('Error fetching like count:', error));
 
-        const debouncedToggleLike = debounce(toggleLike, 300);
+        // Add an event listener to the like button to handle clicks
+        button.addEventListener('click', (event) => {
+            debouncedToggleLike(event, postId);
+        });
+    });
+});
+
+// Function to handle the like/unlike action
+function toggleLike(event, postId) {
+    event.preventDefault();
+    const likeButton = document.getElementById(`like-button-${postId}`);
+    const likeCountElement = document.getElementById(`like-count-${postId}`);
+    let currentLikeCount = parseInt(likeCountElement.textContent, 10);
+    const isLiked = likeButton.classList.contains('liked');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    // Disable the like button to prevent multiple clicks
+    likeButton.disabled = true;
+
+    // Update the like count and button style based on the current like state
+    if (isLiked) {
+        currentLikeCount -= 1;
+        likeButton.classList.remove('liked');
+    } else {
+        currentLikeCount += 1;
+        likeButton.classList.add('liked');
+    }
+
+    // Update the like count display
+    likeCountElement.textContent = currentLikeCount;
+
+    // Send the like/unlike request to the server
+    fetch('/like_post', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken
+        },
+        body: new URLSearchParams({ post_id: postId }).toString(),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            console.error('Error updating like state on server:', data.error);
+            // Revert the like count and button style if there was an error
+            if (isLiked) {
+                currentLikeCount += 1;
+                likeButton.classList.add('liked');
+            } else {
+                currentLikeCount -= 1;
+                likeButton.classList.remove('liked');
+            }
+            likeCountElement.textContent = currentLikeCount;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    })
+    .finally(() => {
+        // Re-enable the like button after the request completes
+        likeButton.disabled = false;
+    });
+}
+
+// Debounced version of the toggleLike function to limit rapid calls
+const debouncedToggleLike = debounce(toggleLike, 300);
+
     </script>
 </body>
 </html>
