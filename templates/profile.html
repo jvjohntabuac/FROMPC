@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for the document -->
     <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page, displaying the username -->
     <title>{{ username }}'s Profile</title>
+    <!-- Link to the external CSS file for styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script>
+        // Function to confirm post deletion with a browser dialog
         function confirmDeletion() {
             return confirm('Are you sure you want to delete this post?');
         }
     </script>
 </head>
 <body>
-    <!-- Back Button -->
+    <!-- Back Button to navigate to the home page -->
     <div class="back-button-container">
         <a href="/home" class="back-button">←</a>
     </div>
 
-    <!-- Navbar -->
+    <!-- Navbar with links to various pages -->
     <div class="navbar">
         <a href="/">Home</a>
         <a href="/posts">View Posts</a>
@@ -25,30 +30,41 @@
         <a href="/logout">Logout</a>
     </div>
 
-    <!-- Main Content -->
+    <!-- Main Content Area -->
     <div class="main-content">
+        <!-- Profile heading displaying the username -->
         <h1>{{ username }}'s Profile</h1>
+        <!-- Subheading for user posts -->
         <h2>Your Posts</h2>
+        <!-- Container for displaying user posts -->
         <div class="posts-container">
+            <!-- Loop through user posts and display each post -->
             {% for post in posts %}
             <div class="post">
+                <!-- Display post content -->
                 <p>{{ post.content }}</p>
+                <!-- Display post image if it exists -->
                 {% if post.image_url %}
                 <img src="{{ post.image_url }}" alt="{{ post.content | truncate(80, true, '...') }}" style="max-width: 100%; height: auto;">
                 {% endif %}
+                <!-- Display post creation date -->
                 <p>Posted on {{ post.created_at }}</p>
-                <!-- Delete Post Form with CSRF Token -->
+                <!-- Form to delete the post with CSRF token and confirmation dialog -->
                 <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST" onsubmit="return confirmDeletion()">
+                    <!-- Hidden input for CSRF token -->
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <!-- Button to submit the delete form -->
                     <button type="submit">Delete Post</button>
                 </form>
             </div>
+            <!-- Message displayed if there are no posts -->
             {% else %}
             <p>You have not posted anything yet.</p>
             {% endfor %}
         </div>
     </div>
-    <style>/* General Reset */
+    <style>
+        /* General Reset: Reset margin, padding, and box-sizing for all elements */
         * {
             margin: 0;
             padding: 0;
@@ -56,48 +72,42 @@
             font-family: 'Arial', sans-serif;
         }
         
-        /* Body Styling */
+        /* Body Styling: Set background color, text color, and line height */
         body {
             background-color: #000;
             color: #fff;
             line-height: 1.6;
         }
         
-       
-        /* Back Button Styling */
+        /* Back Button Container Styling: Padding and text alignment for the back button container */
         .back-button-container {
             padding: 10px;
             text-align: left;
         }
         
-    /* Back Button Styling */
-    .back-button-container {
-    padding: 10px;
-    text-align: left;
-}
+        /* Back Button Styling: Set background, text color, padding, and border for the back button */
+        .back-button {
+            background-color: transparent;
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            border: 2px solid #fff;
+            border-radius: 5px; /* Slightly rounded corners for a modern look */
+            display: inline-block;
+            width: 40px; /* Set width for square shape */
+            height: 40px; /* Set height for square shape */
+            text-align: center;
+            line-height: 20px; /* Center text vertically */
+        }
 
-.back-button {
-    background-color: transparent;
-    color: #fff;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 20px;
-    border: 2px solid #fff;
-    border-radius: 5px; /* Slightly rounded corners for a modern look */
-    display: inline-block;
-    width: 40px; /* Set width for square shape */
-    height: 40px; /* Set height for square shape */
-    text-align: center;
-    line-height: 20px; /* Center text vertically */
-}
-
-.back-button:hover {
-    background-color: rgb(43, 0, 255);
-    transition: 0.3s;
-}
-
+        /* Back Button Hover Effect: Change background color and add transition on hover */
+        .back-button:hover {
+            background-color: rgb(43, 0, 255);
+            transition: 0.3s;
+        }
         
-        /* Main Content Styling */
+        /* Main Content Styling: Set maximum width, margin, padding, background color, border-radius, and box-shadow */
         .main-content {
             max-width: 800px;
             margin: 20px auto;
@@ -107,6 +117,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         
+        /* Main Content Headings Styling: Center text and set color */
         .main-content h1,
         .main-content h2 {
             margin-bottom: 20px;
@@ -114,10 +125,12 @@
             color: #fff;
         }
         
+        /* Posts Container Styling: Set top margin for posts container */
         .posts-container {
             margin-top: 20px;
         }
         
+        /* Post Styling: Set background color, padding, border-radius, box-shadow, and margin for individual posts */
         .post {
             background-color: #222;
             padding: 15px;
@@ -127,21 +140,25 @@
             position: relative;
         }
         
+        /* Post Image Styling: Set border-radius and margin for images in posts */
         .post img {
             border-radius: 8px;
             margin-top: 10px;
         }
         
+        /* Post Text Styling: Set bottom margin for paragraphs in posts */
         .post p {
             margin-bottom: 10px;
         }
         
+        /* Post Form Styling: Position the form absolutely within the post */
         .post form {
             position: absolute;
             top: 10px;
             right: 10px;
         }
         
+        /* Post Button Styling: Set background, text color, border, padding, border-radius, and cursor for the button */
         .post button {
             background-color: transparent;
             color: #fff;
@@ -151,11 +168,12 @@
             cursor: pointer;
         }
         
+        /* Post Button Hover Effect: Change background color and add transition on hover */
         .post button:hover {
             background-color: rgb(255, 7, 7);
             transition: 0.3s;
         }
         
-        </style>
+    </style>
 </body>
 </html>
