@@ -7,13 +7,14 @@
     <title>Create a New Post</title>
     <!-- Include CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+  
 </head>
 <body>
     <div class="post-container">
         <div class="back-button-container">
             <a href="{{ url_for('home') }}" class="back-button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.71 16.29L12.41 14H19v-2H12.41l2.3-2.29L14 8l-6 6 6 6z"/></svg>
-                Back
+                
             </a>
         </div>
 
@@ -26,5 +27,95 @@
             <button type="submit" class="post-button">Post</button>
         </form>
     </div>
+   <style>
+  /* General body styles */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light background color */
+    margin: 0;
+    padding: 0;
+}
+
+/* Post container styles */
+.post-container {
+    max-width: 2000px; /* Increased max-width for a larger container */
+    margin: 50px auto; /* Centers the container horizontally and adds top margin */
+    padding: 40px; /* Increased padding for more spacious content */
+    background: linear-gradient(145deg, #222, #000); /* Subtle gradient for the background */
+    border: 1px solid #444; /* Adds a subtle border */
+    border-radius: 12px; /* Increased border-radius for smoother corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+    color: #fff; /* White text color for contrast */
+}
+
+/* Back button container styles */
+.back-button-container {
+    margin-bottom: 20px;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ffd700; /* Gold color for the text */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.back-button svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    fill: #ffd700; /* Gold color for the icon */
+}
+
+/* Create post form styles */
+.create-post-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-post-form textarea {
+    width: 75%; /* Ensure textarea takes up full width of the container */
+    height: 400px; /* Height of the textarea */
+    padding: 15px; /* Padding inside the textarea */
+    margin-bottom: 20px; /* Increased margin-bottom for spacing */
+    border: 1px solid #666; /* Darker border for the textarea */
+    border-radius: 6px; /* Slightly increased border-radius */
+    font-size: 16px; /* Font size for the text */
+    resize: vertical; /* Allow vertical resizing only */
+    background-color: #333; /* Dark background for the textarea */
+    color: #fff; /* White text color for contrast */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle inner shadow for depth */
+}
+
+.file-input {
+    margin-bottom: 20px; /* Increased margin-bottom for spacing */
+}
+
+.post-button {
+    padding: 12px 24px; /* Adjusted padding for a larger button */
+    border: none;
+    border-radius: 6px;
+    background-color: #ffd700; /* Gold background color for the button */
+    color: #000; /* Black text color for contrast */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.post-button:hover {
+    background-color: #e5c100; /* Slightly darker gold on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.post-button:active {
+    background-color: #d4b800; /* Even darker gold on click */
+    transform: translateY(0); /* Reset lift effect on click */
+}
+
+
+    </style>
 </body>
 </html>
