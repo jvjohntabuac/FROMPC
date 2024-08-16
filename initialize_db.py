@@ -2,6 +2,7 @@ import sqlite3
 
 def initialize_database():
     try:
+        # Connect to the SQLite database
         conn = sqlite3.connect('user_accounts.db')
         c = conn.cursor()
 

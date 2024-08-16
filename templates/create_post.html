@@ -1,120 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Create a New Post</title>
-    <!-- Include CSRF Token -->
+    <meta charset="UTF-8"> <!-- Specifies the character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures the page is responsive on all devices -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Links to the external CSS file -->
+    <title>Create a New Post</title> <!-- Title of the page -->
+
+    <!-- Include CSRF Token for security -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-  
 </head>
 <body>
+    <!-- Main container for the post creation page -->
     <div class="post-container">
+        
+        <!-- Container for the back button -->
         <div class="back-button-container">
-            <a href="{{ url_for('home') }}" class="back-button">
+            <a href="{{ url_for('home') }}" class="back-button"> <!-- Link back to the home page -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.71 16.29L12.41 14H19v-2H12.41l2.3-2.29L14 8l-6 6 6 6z"/></svg>
-                
             </a>
         </div>
 
-        <!-- Create Post Form -->
+        <!-- Form to create a new post -->
         <form action="{{ url_for('create_post') }}" method="POST" enctype="multipart/form-data" class="create-post-form">
-            <!-- CSRF Token -->
+            <!-- Hidden input for CSRF token -->
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <!-- Textarea for post content -->
             <textarea name="content" placeholder="Write something..." required></textarea>
+            
+            <!-- Input for uploading an image -->
             <input type="file" name="image" class="file-input">
+
+            <!-- Button to submit the post -->
             <button type="submit" class="post-button">Post</button>
         </form>
     </div>
+
    <style>
   /* General body styles */
+  body {
+      font-family: Arial, sans-serif; /* Font for the entire page */
+      background-color: #f4f4f4; /* Light background color */
+      margin: 0; /* Removes default margin */
+      padding: 0; /* Removes default padding */
+  }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Light background color */
-    margin: 0;
-    padding: 0;
-}
+  /* Styles for the post container */
+  .post-container {
+      max-width: 2000px; /* Maximum width of the container */
+      margin: 50px auto; /* Centers the container horizontally with top margin */
+      padding: 40px; /* Padding inside the container */
+      background: linear-gradient(145deg, #222, #000); /* Gradient background */
+      border: 1px solid #444; /* Border color */
+      border-radius: 12px; /* Rounded corners */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Box shadow for depth */
+      color: #fff; /* Text color inside the container */
+  }
 
-/* Post container styles */
-.post-container {
-    max-width: 2000px; /* Increased max-width for a larger container */
-    margin: 50px auto; /* Centers the container horizontally and adds top margin */
-    padding: 40px; /* Increased padding for more spacious content */
-    background: linear-gradient(145deg, #222, #000); /* Subtle gradient for the background */
-    border: 1px solid #444; /* Adds a subtle border */
-    border-radius: 12px; /* Increased border-radius for smoother corners */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
-    color: #fff; /* White text color for contrast */
-}
+  /* Styles for the back button container */
+  .back-button-container {
+      margin-bottom: 20px; /* Margin below the back button container */
+  }
 
-/* Back button container styles */
-.back-button-container {
-    margin-bottom: 20px;
-}
+  /* Styles for the back button */
+  .back-button {
+      display: inline-flex; /* Inline-flex container for the button */
+      align-items: center; /* Center-aligns the content */
+      text-decoration: none; /* Removes underline from the link */
+      color: #ffd700; /* Gold color for the text */
+      font-weight: bold; /* Bold text */
+      font-size: 16px; /* Font size */
+  }
 
-.back-button {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    color: #ffd700; /* Gold color for the text */
-    font-weight: bold;
-    font-size: 16px;
-}
+  .back-button svg {
+      width: 24px; /* Width of the SVG icon */
+      height: 24px; /* Height of the SVG icon */
+      margin-right: 8px; /* Space between icon and text */
+      fill: #ffd700; /* Fill color for the SVG icon */
+  }
 
-.back-button svg {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    fill: #ffd700; /* Gold color for the icon */
-}
+  /* Styles for the create post form */
+  .create-post-form {
+      display: flex; /* Flexbox layout for the form */
+      flex-direction: column; /* Vertical alignment of form elements */
+  }
 
-/* Create post form styles */
-.create-post-form {
-    display: flex;
-    flex-direction: column;
-}
+  .create-post-form textarea {
+      width: 75%; /* Textarea width */
+      height: 400px; /* Height of the textarea */
+      padding: 15px; /* Padding inside the textarea */
+      margin-bottom: 20px; /* Space below the textarea */
+      border: 1px solid #666; /* Border color */
+      border-radius: 6px; /* Rounded corners */
+      font-size: 16px; /* Font size */
+      resize: vertical; /* Allow vertical resizing only */
+      background-color: #333; /* Background color of the textarea */
+      color: #fff; /* Text color */
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
+  }
 
-.create-post-form textarea {
-    width: 75%; /* Ensure textarea takes up full width of the container */
-    height: 400px; /* Height of the textarea */
-    padding: 15px; /* Padding inside the textarea */
-    margin-bottom: 20px; /* Increased margin-bottom for spacing */
-    border: 1px solid #666; /* Darker border for the textarea */
-    border-radius: 6px; /* Slightly increased border-radius */
-    font-size: 16px; /* Font size for the text */
-    resize: vertical; /* Allow vertical resizing only */
-    background-color: #333; /* Dark background for the textarea */
-    color: #fff; /* White text color for contrast */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle inner shadow for depth */
-}
+  .file-input {
+      margin-bottom: 20px; /* Space below the file input */
+  }
 
-.file-input {
-    margin-bottom: 20px; /* Increased margin-bottom for spacing */
-}
+  /* Styles for the post button */
+  .post-button {
+      padding: 12px 24px; /* Padding inside the button */
+      border: none; /* Removes the border */
+      border-radius: 6px; /* Rounded corners */
+      background-color: #ffd700; /* Gold background color */
+      color: #000; /* Text color */
+      font-size: 16px; /* Font size */
+      cursor: pointer; /* Pointer cursor on hover */
+      transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+  }
 
-.post-button {
-    padding: 12px 24px; /* Adjusted padding for a larger button */
-    border: none;
-    border-radius: 6px;
-    background-color: #ffd700; /* Gold background color for the button */
-    color: #000; /* Black text color for contrast */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
+  /* Hover effect for the post button */
+  .post-button:hover {
+      background-color: #e5c100; /* Slightly darker gold on hover */
+      transform: translateY(-2px); /* Slight lift effect on hover */
+  }
 
-.post-button:hover {
-    background-color: #e5c100; /* Slightly darker gold on hover */
-    transform: translateY(-2px); /* Slight lift effect on hover */
-}
-
-.post-button:active {
-    background-color: #d4b800; /* Even darker gold on click */
-    transform: translateY(0); /* Reset lift effect on click */
-}
-
+  /* Active (pressed) effect for the post button */
+  .post-button:active {
+      background-color: #d4b800; /* Even darker gold on click */
+      transform: translateY(0); /* Reset lift effect on click */
+  }
 
     </style>
 </body>
