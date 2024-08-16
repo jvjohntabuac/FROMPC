@@ -8,17 +8,34 @@
     <script>
         function validatePassword() {
             var password = document.getElementById("newpsw").value;
-            var confirmpassword = document.getElementById("confpsw").value;
-            if (password !== confirmpassword) {
-                alert("Passwords do not match.");
+            var hasNumber = /\d/;
+
+            if (!hasNumber.test(password)) {
+                alert("Password must contain at least one number.");
                 return false;
             }
+
             return true;
+        }
+
+        function validateUsername() {
+            var username = document.getElementById("newuname").value;
+
+            if (username.length < 6) {
+                alert("Username must be at least six characters long.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateForm() {
+            return validateUsername() && validatePassword();
         }
     </script>
 </head>
 <body>
-    <form action="/signup" method="post" onsubmit="return validatePassword()">
+    <form action="/signup" method="post" onsubmit="return validateForm()">
         <div class="container">
             <!-- CSRF Token -->
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -48,5 +65,32 @@
             <button type="submit">Create Account</button>
         </div>
     </form>
+    <style>
+        .container {
+            /* Other container styles (if any) */
+        }
+        
+        /* Set the text color for input fields within the container */
+        .container input {
+            color: white; /* Text color for input fields */
+            background-color: white; /* Background color for input fields */
+            border: 1px solid #ccc; /* Optional: Add border */
+            padding: 10px; /* Optional: Add some padding */
+            width: 100%; /* Optional: Full width */
+            box-sizing: border-box; /* Optional: Include padding in width */
+        }
+        
+       
+        
+        .container button {
+            color: white; /* Set button text color to white */
+            padding: 10px; /* Add padding */
+            border: none; /* Remove border */
+            cursor: pointer; /* Change cursor on hover */
+        }
+        
+       
+        
+         </style>
 </body>
 </html>
