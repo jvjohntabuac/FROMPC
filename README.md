@@ -1,3 +1,4 @@
+Since that the user_accounts.py are ignored, you will need to run the initialize_db.py to activate it if not activated then the website will not run.
 Elden Ring Applications
 
 Part 1 - Clone Project

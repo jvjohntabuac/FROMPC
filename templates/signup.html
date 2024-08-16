@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for the document -->
     <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the external CSS file for general styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Title of the page -->
     <title>Create Account</title>
     <style>
-   
-.container {
-    color: white; /* Set default text color to white */
-}
+        /* Styling for container and input fields */
+        .container {
+            color: white; /* Set default text color to white */
+        }
 
+        /* Styling for input fields, textarea, and select elements within .container */
+        .container input,
+        .container textarea,
+        .container select {
+            color: white; /* Text color inside input fields */
+            background-color: #333; /* Background color of input fields for better contrast */
+            border: 1px solid #555; /* Border color for input fields */
+        }
 
-.container input,
-.container textarea,
-.container select {
-    color: white; /* Text color inside input fields */
-    background-color: #333; /* Background color of input fields for better contrast */
-    border: 1px solid #555; /* Border color for input fields */
-}
-
-
-.container input::placeholder {  
-    color: #ccc; /* Lighter color for placeholder text */
-}
-
+        /* Styling for placeholder text inside input fields */
+        .container input::placeholder {  
+            color: #ccc; /* Lighter color for placeholder text */
+        }
     </style>
     <script>
+        // Function to validate password input
         function validatePassword() {
             var password = document.getElementById("newpsw").value;
             var hasNumber = /\d/;
 
+            // Check if the password contains at least one number
             if (!hasNumber.test(password)) {
                 alert("Password must contain at least one number.");
                 return false;
@@ -39,9 +44,11 @@
             return true;
         }
 
+        // Function to validate username input
         function validateUsername() {
             var username = document.getElementById("newuname").value;
 
+            // Check if the username is at least six characters long
             if (username.length < 6) {
                 alert("Username must be at least six characters long.");
                 return false;
@@ -50,17 +57,20 @@
             return true;
         }
 
+        // Function to validate the entire form
         function validateForm() {
             return validateUsername() && validatePassword();
         }
     </script>
 </head>
 <body>
+    <!-- Form for creating a new account -->
     <form action="/signup" method="post" onsubmit="return validateForm()">
         <div class="container">
-            <!-- CSRF Token -->
+            <!-- Hidden input for CSRF token -->
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
+            <!-- Flash messages for displaying validation errors or notifications -->
             {% with messages = get_flashed_messages(with_categories=True) %}
                 {% if messages %}
                     <ul class="flash-messages">
@@ -71,18 +81,23 @@
                 {% endif %}
             {% endwith %}
 
+            <!-- Email input field -->
             <label for="email"><b>Email</b></label>
             <input type="email" id="email" placeholder="Enter Email" name="email" required>
             
+            <!-- Username input field -->
             <label for="newuname"><b>Username</b></label>
             <input type="text" id="newuname" placeholder="Enter Username" name="newuname" required>
 
+            <!-- Password input field -->
             <label for="newpsw"><b>Password</b></label>
             <input type="password" id="newpsw" placeholder="Enter Password" name="newpsw" required>
 
+            <!-- Confirm Password input field -->
             <label for="confpsw"><b>Confirm Password</b></label>
             <input type="password" id="confpsw" placeholder="Confirm Password" name="confpsw" required>
 
+            <!-- Submit button to create the account -->
             <button type="submit">Create Account</button>
         </div>
     </form>
