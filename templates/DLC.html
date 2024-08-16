@@ -5,26 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DLC Boss Guide</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <!--Hollow knight inspired font-->
+    <!-- Hollow Knight inspired font -->
     <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
-
     <div class="area-title" id="area-title">
         <h1>DLC_page</h1>
     </div>
-    
     <style>
-
-
-.sprite3-img:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
-}
+        /* Add a zoom effect on hover for the sprite image */
+        .sprite3-img:hover {
+            transform: scale(1.1); /* Slight zoom effect on hover */
+        }
 
         /* Apply white color to all headings and paragraphs */
         h1, h2, h3, h4, h5, h6, p, li {
             color: white;
         }
-        
-        /* Carousel container */
+
+        /* Carousel container styles */
         .carousel {
             position: relative;
             width: 100%;
@@ -32,20 +29,20 @@
             margin: auto;
             overflow: hidden;
         }
-        
-        /* Carousel images */
+
+        /* Carousel images styles */
         .carousel img {
             width: 100%;
             display: block;
         }
-        
-        /* Carousel inner wrapper */
+
+        /* Carousel inner wrapper styles */
         .carousel-inner {
             display: flex;
             transition: transform 0.5s ease-in-out;
         }
-        
-        /* Carousel controls */
+
+        /* Carousel controls styles */
         .carousel-control {
             position: absolute;
             top: 50%;
@@ -54,7 +51,8 @@
             justify-content: space-between;
             transform: translateY(-50%);
         }
-        
+
+        /* Carousel control buttons styles */
         .carousel-control button {
             background-color: rgba(0, 0, 0, 0.5);
             border: none;
@@ -63,6 +61,8 @@
             cursor: pointer;
             padding: 10px;
         }
+
+        /* Area title styles */
         .area-title {
             position: fixed; /* Keeps it in place as the user scrolls */
             top: 50%; /* Centers it vertically */
@@ -78,16 +78,19 @@
             z-index: 1000;
             transition: opacity 2s ease-in-out, visibility 2s ease-in-out; /* Fade effect */
         }
-        
+
+        /* Show area title with fade effect */
         .area-title.show {
             opacity: 1;
             visibility: visible;
         }
-        .area-title {
-    font-family: 'Uncial Antiqua', cursive;
-    
-}
 
+        /* Font style for the area title */
+        .area-title {
+            font-family: 'Uncial Antiqua', cursive;
+        }
+
+        /* Sprite3 container styles */
         .sprite3-container {
             position: fixed;
             bottom: 20px; /* Adjust distance from the bottom */
@@ -95,35 +98,34 @@
             z-index: 1000; /* Keeps it on top of other content */
         }
 
+        /* Sprite3 image styles */
         .sprite3-img {
             width: 100px; /* Adjust size as needed */
             height: auto; /* Maintain aspect ratio */
         }
-        
-   /* Hide Text Box */
-.text-box.hidden {
-    display: none; /* Hide the text box */
-}
 
-/* Text Box Styles */
-#text-box {
-    position: fixed; /* Use fixed positioning to keep it in place */
-    top: 10%; /* Distance from the top of the page */
-    right: 10%; /* Distance from the right edge of the page */
-    width: 300px; /* Width of the text box */
-    padding: 15px; /* Padding inside the text box */
-    background-color: #111; /* Background color */
-    color: #ffffff; /* Text color */
-    font-family: "Courier New", Courier, monospace; /* Font style */
-    border: 2px solid #ea00ff; /* Border color */
-    border-radius: 10px; /* Rounded corners */
-    display: none; /* Hidden initially */
-    z-index: 1000; /* Ensure it appears above other elements */
-    white-space: pre-wrap; /* Preserve spaces and line breaks */
-    pointer-events: auto; /* Enable interaction with the text box */
-}
+        /* Hide text box styles */
+        .text-box.hidden {
+            display: none; /* Hide the text box */
+        }
 
-   
+        /* Text box styles */
+        #text-box {
+            position: fixed; /* Use fixed positioning to keep it in place */
+            top: 10%; /* Distance from the top of the page */
+            right: 10%; /* Distance from the right edge of the page */
+            width: 300px; /* Width of the text box */
+            padding: 15px; /* Padding inside the text box */
+            background-color: #111; /* Background color */
+            color: #ffffff; /* Text color */
+            font-family: "Courier New", Courier, monospace; /* Font style */
+            border: 2px solid #ea00ff; /* Border color */
+            border-radius: 10px; /* Rounded corners */
+            display: none; /* Hidden initially */
+            z-index: 1000; /* Ensure it appears above other elements */
+            white-space: pre-wrap; /* Preserve spaces and line breaks */
+            pointer-events: auto; /* Enable interaction with the text box */
+        }
     </style>
 </head>
 <body>
@@ -134,7 +136,7 @@
         </a>
     </div>
 
-    
+    <!-- Sprite3 container -->
     <div class="sprite3-container">
         <img src="{{ url_for('static', filename='uploads/sprite3.png') }}" alt="Sprite 3" class="sprite3-img">
     </div>
@@ -144,302 +146,382 @@
 
 
 
-    <!-- Main Content -->
-    <div class="main-content container">
-        <div class="row">
-            <!-- Guide Content -->
-            <div class="col-md-9">
-                <div class="image-container">
-                    <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Guide Image">
-                </div>
+<!-- Main Content -->
+<div class="main-content container"> <!-- Container for the main content of the page -->
+    <div class="row"> <!-- Bootstrap row to structure content in columns -->
+        <!-- Guide Content -->
+        <div class="col-md-9"> <!-- Column for the guide content, taking up 9/12 of the width -->
+            <!-- Background Image for the Guide -->
+            <div class="image-container"> <!-- Container for the background image -->
+                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Guide Image"> <!-- Background image for the guide -->
+            </div>
+            
+            <!-- Guide Sections -->
+            <div class="guide-content"> <!-- Container for the guide content sections -->
+                <h2>DLC Boss Guide</h2> <!-- Title of the guide -->
                 
-                <!-- Guide Sections -->
-                <div class="guide-content">
-                    <h2>DLC Boss Guide</h2>
-                    
-                    <!-- Section 1: Dancing Lion -->
-                    <div class="section-space">
-                        <h3 id="Radahn">Radahn</h3>
-                        <div class="carousel" id="Radahn-carousel">
-                            <div class="carousel-inner">
-                                <img src="{{ url_for('static', filename='uploads/4.jpg') }}" alt="Radah Image 1">
-                                <img src="{{ url_for('static', filename='uploads/5.jpg') }}" alt="Radah Image 2">
-                                <img src="{{ url_for('static', filename='uploads/6.jpg') }}" alt="Radah Image 3">
-                            </div>
-                            <div class="carousel-control">
-                                <button onclick="prevSlide('dancing-lion-carousel')">&#10094;</button>
-                                <button onclick="nextSlide('dancing-lion-carousel')">&#10095;</button>
-                            </div>
+                <!-- Section 1: Radahn -->
+                <div class="section-space"> <!-- Container for the Radahn section -->
+                    <h3 id="Radahn">Radahn</h3> <!-- Heading for Radahn section with an ID for linking -->
+                    <div class="carousel" id="Radahn-carousel"> <!-- Carousel container for Radahn's images -->
+                        <!-- Carousel Inner: Radahn Images -->
+                        <div class="carousel-inner"> <!-- Container for the images in the Radahn carousel -->
+                            <img src="{{ url_for('static', filename='uploads/4.jpg') }}" alt="Radahn Image 1"> <!-- Radahn image 1 -->
+                            <img src="{{ url_for('static', filename='uploads/5.jpg') }}" alt="Radahn Image 2"> <!-- Radahn image 2 -->
+                            <img src="{{ url_for('static', filename='uploads/6.jpg') }}" alt="Radahn Image 3"> <!-- Radahn image 3 -->
                         </div>
-                        <div class="wiki-section">
-                            <h4>Overview</h4>
-                            <p>The Dancing Lion is known for its swift and unpredictable movements. This boss excels in agility, making its attacks difficult to anticipate.</p>
-                            <h4>Strategies</h4>
-                            <ul>
-                                <li>Maintain a safe distance to avoid its rapid attacks.</li>
-                                <li>Use ranged attacks to capitalize on its brief moments of vulnerability.</li>
-                                <li>Keep moving to avoid its area-of-effect attacks.</li>
-                            </ul>
-                            <h4>Weaknesses</h4>
-                            <ul>
-                                <li>Susceptible to high-damage, fast attacks.</li>
-                                <li>Its leaping attacks can be avoided with precise timing.</li>
-                            </ul>
+                        <!-- Carousel Controls: Radahn -->
+                        <div class="carousel-control"> <!-- Controls for navigating the Radahn carousel -->
+                            <button onclick="prevSlide('Radahn-carousel')">&#10094;</button> <!-- Button to go to the previous slide -->
+                            <button onclick="nextSlide('Radahn-carousel')">&#10095;</button> <!-- Button to go to the next slide -->
                         </div>
                     </div>
-
-                    <!-- Section 2: Renalla -->
-                    <div class="section-space">
-                        <h3 id="renalla">Renalla</h3>
-                        <div class="carousel" id="renalla-carousel">
-                            <div class="carousel-inner">
-                                <img src="{{ url_for('static', filename='uploads/7.jpg') }}" alt="Renalla Image 1">
-                                <img src="{{ url_for('static', filename='uploads/8.jpg') }}" alt="Renalla Image 2">
-                                <img src="{{ url_for('static', filename='uploads/9.jpg') }}" alt="Renalla Image 3">
-                            </div>
-                            <div class="carousel-control">
-                                <button onclick="prevSlide('renalla-carousel')">&#10094;</button>
-                                <button onclick="nextSlide('renalla-carousel')">&#10095;</button>
-                            </div>
-                        </div>
-                        <div class="wiki-section">
-                            <h4>Overview</h4>
-                            <p>Renalla is a powerful sorceress with a vast array of magical attacks that can overwhelm players if not handled properly.</p>
-                            <h4>Strategies</h4>
-                            <ul>
-                                <li>Close the distance quickly to disrupt her spellcasting.</li>
-                                <li>Use magic-resistant gear to reduce damage from her spells.</li>
-                                <li>Pay attention to her attack patterns to avoid her most dangerous spells.</li>
-                            </ul>
-                            <h4>Weaknesses</h4>
-                            <ul>
-                                <li>Vulnerable to interruptions during her spellcasting.</li>
-                                <li>Magic attacks can be reduced with proper gear and timing.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Section 3: Messmer -->
-                    <div class="section-space">
-                        <h3 id="messmer">Messmer</h3>
-                        <div class="carousel" id="messmer-carousel">
-                            <div class="carousel-inner">
-                                <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Messmer Image 1">
-                                <img src="{{ url_for('static', filename='uploads/10.jpg') }}" alt="Messmer Image 2">
-                                <img src="{{ url_for('static', filename='uploads/14.jpg') }}" alt="Messmer Image 3">
-                            </div>
-                            <div class="carousel-control">
-                                <button onclick="prevSlide('messmer-carousel')">&#10094;</button>
-                                <button onclick="nextSlide('messmer-carousel')">&#10095;</button>
-                            </div>
-                        </div>
-                        <div class="wiki-section">
-                            <h4>Overview</h4>
-                            <p>Messmer is known for his high defense and powerful counterattacks. This boss requires careful timing and strategy to defeat.</p>
-                            <h4>Strategies</h4>
-                            <ul>
-                                <li>Look for openings in his defense after he finishes a combo.</li>
-                                <li>Use fast, high-damage moves to exploit these openings.</li>
-                                <li>Maintain a defensive posture to mitigate damage from his heavy attacks.</li>
-                            </ul>
-                            <h4>Weaknesses</h4>
-                            <ul>
-                                <li>High-damage attacks can break through his defense if timed correctly.</li>
-                                <li>Defensive maneuvers can help avoid his powerful counterattacks.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Section 4: Gaius -->
-                    <div class="section-space">
-                        <h3 id="gaius">Gaius</h3>
-                        <div class="carousel" id="gaius-carousel">
-                            <div class="carousel-inner">
-                                <img src="{{ url_for('static', filename='uploads/11.jpg') }}" alt="Gaius Image 1">
-                                <img src="{{ url_for('static', filename='uploads/12.jpg') }}" alt="Gaius Image 2">
-                                <img src="{{ url_for('static', filename='uploads/1.jpg') }}" alt="Gaius Image 3">
-                            </div>
-                            <div class="carousel-control">
-                                <button onclick="prevSlide('gaius-carousel')">&#10094;</button>
-                                <button onclick="nextSlide('gaius-carousel')">&#10095;</button>
-                            </div>
-                        </div>
-                        <div class="wiki-section">
-                            <h4>Overview</h4>
-                            <p>Gaius is a formidable warrior with a mix of strong melee and magic attacks. His versatility makes him a challenging opponent.</p>
-                            <h4>Strategies</h4>
-                            <ul>
-                                <li>Use hit-and-run tactics to avoid his powerful melee attacks.</li>
-                                <li>Be prepared to dodge his magic attacks and counter quickly.</li>
-                                <li>Focus on avoiding his most powerful moves while looking for openings.</li>
-                            </ul>
-                            <h4>Weaknesses</h4>
-                            <ul>
-                                <li>His attack patterns are predictable if observed carefully.</li>
-                                <li>Quick, precise attacks can exploit his slow recovery times.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Section 5: Bayle -->
-                    <div class="section-space">
-                        <h3 id="bayle">Bayle</h3>
-                        <div class="carousel" id="bayle-carousel">
-                            <div class="carousel-inner">
-                                <img src="{{ url_for('static', filename='uploads/bayle.jpg') }}" alt="Bayle Image 1">
-                                <img src="{{ url_for('static', filename='uploads/2.jpg') }}" alt="Bayle Image 2">
-                                <img src="{{ url_for('static', filename='uploads/13.jpg') }}" alt="Bayle Image 3">
-                            </div>
-                            <div class="carousel-control">
-                                <button onclick="prevSlide('bayle-carousel')">&#10094;</button>
-                                <button onclick="nextSlide('bayle-carousel')">&#10095;</button>
-                            </div>
-                        </div>
-                        <div class="wiki-section">
-                            <h4>Overview</h4>
-                            <p>Bayle is known for his agility and deceptive attack patterns, making him a tricky opponent to face.</p>
-                            <h4>Strategies</h4>
-                            <ul>
-                                <li>Use defensive maneuvers and stay alert to predict his movements.</li>
-                                <li>Look for openings after he completes an attack sequence.</li>
-                                <li>Use high-speed and precision attacks to counter his deceptive tactics.</li>
-                            </ul>
-                            <h4>Weaknesses</h4>
-                            <ul>
-                                <li>Vulnerable to precise, high-speed attacks.</li>
-                                <li>Can be outmaneuvered with quick reflexes and careful observation.</li>
-                            </ul>
-                        </div>
+                    <div class="wiki-section"> <!-- Container for the Radahn wiki section -->
+                        <h4>Overview</h4> <!-- Heading for the overview section -->
+                        <p>The Dancing Lion is known for its swift and unpredictable movements. This boss excels in agility, making its attacks difficult to anticipate.</p> <!-- Overview text for Radahn -->
+                        <h4>Strategies</h4> <!-- Heading for the strategies section -->
+                        <ul> <!-- List of strategies for Radahn -->
+                            <li>Maintain a safe distance to avoid its rapid attacks.</li> <!-- Strategy 1 -->
+                            <li>Use ranged attacks to capitalize on its brief moments of vulnerability.</li> <!-- Strategy 2 -->
+                            <li>Keep moving to avoid its area-of-effect attacks.</li> <!-- Strategy 3 -->
+                        </ul>
+                        <h4>Weaknesses</h4> <!-- Heading for the weaknesses section -->
+                        <ul> <!-- List of weaknesses for Radahn -->
+                            <li>Susceptible to high-damage, fast attacks.</li> <!-- Weakness 1 -->
+                            <li>Its leaping attacks can be avoided with precise timing.</li> <!-- Weakness 2 -->
+                        </ul>
                     </div>
                 </div>
-            </div>
 
-             <!-- Text Box with Dropdown Navigation -->
-    <div id="text-box" class="text-box hidden">
-        <div class="text-box-content">
-            <h3>Guide Sections</h3>
-            <select class="custom-select" onchange="location = this.value;">
-                <option value="" selected>Choose a section</option>
-                <option value="#Radahn">Radahn</option>
-                <option value="#renalla">Renalla</option>
-                <option value="#messmer">Messmer</option>
-                <option value="#gaius">Gaius</option>
-                <option value="#bayle">Bayle</option>
-            </select>
-          
+                <!-- Section 2: Renalla -->
+                <div class="section-space"> <!-- Container for the Renalla section -->
+                    <h3 id="renalla">Renalla</h3> <!-- Heading for Renalla section with an ID for linking -->
+                    <div class="carousel" id="renalla-carousel"> <!-- Carousel container for Renalla's images -->
+                        <!-- Carousel Inner: Renalla Images -->
+                        <div class="carousel-inner"> <!-- Container for the images in the Renalla carousel -->
+                            <img src="{{ url_for('static', filename='uploads/7.jpg') }}" alt="Renalla Image 1"> <!-- Renalla image 1 -->
+                            <img src="{{ url_for('static', filename='uploads/8.jpg') }}" alt="Renalla Image 2"> <!-- Renalla image 2 -->
+                            <img src="{{ url_for('static', filename='uploads/9.jpg') }}" alt="Renalla Image 3"> <!-- Renalla image 3 -->
+                        </div>
+                        <!-- Carousel Controls: Renalla -->
+                        <div class="carousel-control"> <!-- Controls for navigating the Renalla carousel -->
+                            <button onclick="prevSlide('renalla-carousel')">&#10094;</button> <!-- Button to go to the previous slide -->
+                            <button onclick="nextSlide('renalla-carousel')">&#10095;</button> <!-- Button to go to the next slide -->
+                        </div>
+                    </div>
+                    <div class="wiki-section"> <!-- Container for the Renalla wiki section -->
+                        <h4>Overview</h4> <!-- Heading for the overview section -->
+                        <p>Renalla is a powerful sorceress with a vast array of magical attacks that can overwhelm players if not handled properly.</p> <!-- Overview text for Renalla -->
+                        <h4>Strategies</h4> <!-- Heading for the strategies section -->
+                        <ul> <!-- List of strategies for Renalla -->
+                            <li>Close the distance quickly to disrupt her spellcasting.</li> <!-- Strategy 1 -->
+                            <li>Use magic-resistant gear to reduce damage from her spells.</li> <!-- Strategy 2 -->
+                            <li>Pay attention to her attack patterns to avoid her most dangerous spells.</li> <!-- Strategy 3 -->
+                        </ul>
+                        <h4>Weaknesses</h4> <!-- Heading for the weaknesses section -->
+                        <ul> <!-- List of weaknesses for Renalla -->
+                            <li>Vulnerable to interruptions during her spellcasting.</li> <!-- Weakness 1 -->
+                            <li>Magic attacks can be reduced with proper gear and timing.</li> <!-- Weakness 2 -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 3: Messmer -->
+                <div class="section-space"> <!-- Container for the Messmer section -->
+                    <h3 id="messmer">Messmer</h3> <!-- Heading for Messmer section with an ID for linking -->
+                    <div class="carousel" id="messmer-carousel"> <!-- Carousel container for Messmer's images -->
+                        <!-- Carousel Inner: Messmer Images -->
+                        <div class="carousel-inner"> <!-- Container for the images in the Messmer carousel -->
+                            <img src="{{ url_for('static', filename='uploads/bg.jpeg') }}" alt="Messmer Image 1"> <!-- Messmer image 1 -->
+                            <img src="{{ url_for('static', filename='uploads/10.jpg') }}" alt="Messmer Image 2"> <!-- Messmer image 2 -->
+                            <img src="{{ url_for('static', filename='uploads/14.jpg') }}" alt="Messmer Image 3"> <!-- Messmer image 3 -->
+                        </div>
+                        <!-- Carousel Controls: Messmer -->
+                        <div class="carousel-control"> <!-- Controls for navigating the Messmer carousel -->
+                            <button onclick="prevSlide('messmer-carousel')">&#10094;</button> <!-- Button to go to the previous slide -->
+                            <button onclick="nextSlide('messmer-carousel')">&#10095;</button> <!-- Button to go to the next slide -->
+                        </div>
+                    </div>
+                    <div class="wiki-section"> <!-- Container for the Messmer wiki section -->
+                        <h4>Overview</h4> <!-- Heading for the overview section -->
+                        <p>Messmer is known for his high defense and powerful counterattacks. This boss requires careful timing and strategy to defeat.</p> <!-- Overview text for Messmer -->
+                        <h4>Strategies</h4> <!-- Heading for the strategies section -->
+                        <ul> <!-- List of strategies for Messmer -->
+                            <li>Look for openings in his defense after he finishes a combo.</li> <!-- Strategy 1 -->
+                            <li>Use fast, high-damage moves to exploit these openings.</li> <!-- Strategy 2 -->
+                            <li>Maintain a defensive posture to mitigate damage from his heavy attacks.</li> <!-- Strategy 3 -->
+                        </ul>
+                        <h4>Weaknesses</h4> <!-- Heading for the weaknesses section -->
+                        <ul> <!-- List of weaknesses for Messmer -->
+                            <li>High-damage attacks can break through his defense if timed correctly.</li> <!-- Weakness 1 -->
+                            <li>Defensive maneuvers can help avoid his powerful counterattacks.</li> <!-- Weakness 2 -->
+                        </ul>
+                    </div>
+                </div>
+
+               <!-- Section 4: Gaius -->
+<div class="section-space">
+    <!-- Heading for the Gaius section -->
+    <h3 id="gaius">Gaius</h3>
+    
+    <!-- Carousel for Gaius images -->
+    <div class="carousel" id="gaius-carousel">
+        <!-- Carousel Inner: Contains images related to Gaius -->
+        <div class="carousel-inner">
+            <!-- Image 1 for Gaius -->
+            <img src="{{ url_for('static', filename='uploads/11.jpg') }}" alt="Gaius Image 1">
+            <!-- Image 2 for Gaius -->
+            <img src="{{ url_for('static', filename='uploads/12.jpg') }}" alt="Gaius Image 2">
+            <!-- Image 3 for Gaius -->
+            <img src="{{ url_for('static', filename='uploads/1.jpg') }}" alt="Gaius Image 3">
         </div>
-            </div>
+        <!-- Carousel Controls for navigating Gaius images -->
+        <div class="carousel-control">
+            <!-- Button to go to the previous slide -->
+            <button onclick="prevSlide('gaius-carousel')">&#10094;</button>
+            <!-- Button to go to the next slide -->
+            <button onclick="nextSlide('gaius-carousel')">&#10095;</button>
         </div>
     </div>
-
-    <!-- JavaScript for Carousels -->
-    <script>
-      // Initialize carousel
-document.addEventListener('DOMContentLoaded', () => {
-    const carousels = document.querySelectorAll('.carousel');
-
-    carousels.forEach(carousel => {
-        const inner = carousel.querySelector('.carousel-inner');
-        const slides = Array.from(inner.children);
+    
+    <!-- Wiki Section for Gaius information -->
+    <div class="wiki-section">
+        <!-- Overview of Gaius -->
+        <h4>Overview</h4>
+        <p>Gaius is a formidable warrior with a mix of strong melee and magic attacks. His versatility makes him a challenging opponent.</p>
         
-        // Clone the first and last slides for seamless looping
-        const firstClone = slides[0].cloneNode(true);
-        const lastClone = slides[slides.length - 1].cloneNode(true);
+        <!-- Strategies to defeat Gaius -->
+        <h4>Strategies</h4>
+        <ul>
+            <!-- Strategy 1 -->
+            <li>Use hit-and-run tactics to avoid his powerful melee attacks.</li>
+            <!-- Strategy 2 -->
+            <li>Be prepared to dodge his magic attacks and counter quickly.</li>
+            <!-- Strategy 3 -->
+            <li>Focus on avoiding his most powerful moves while looking for openings.</li>
+        </ul>
+        
+        <!-- Weaknesses of Gaius -->
+        <h4>Weaknesses</h4>
+        <ul>
+            <!-- Weakness 1 -->
+            <li>His attack patterns are predictable if observed carefully.</li>
+            <!-- Weakness 2 -->
+            <li>Quick, precise attacks can exploit his slow recovery times.</li>
+        </ul>
+    </div>
+</div>
 
-        inner.appendChild(firstClone);
-        inner.insertBefore(lastClone, slides[0]);
+<!-- Section 5: Bayle -->
+<div class="section-space">
+    <!-- Heading for the Bayle section -->
+    <h3 id="bayle">Bayle</h3>
+    
+    <!-- Carousel for Bayle images -->
+    <div class="carousel" id="bayle-carousel">
+        <!-- Carousel Inner: Contains images related to Bayle -->
+        <div class="carousel-inner">
+            <!-- Image 1 for Bayle -->
+            <img src="{{ url_for('static', filename='uploads/bayle.jpg') }}" alt="Bayle Image 1">
+            <!-- Image 2 for Bayle -->
+            <img src="{{ url_for('static', filename='uploads/2.jpg') }}" alt="Bayle Image 2">
+            <!-- Image 3 for Bayle -->
+            <img src="{{ url_for('static', filename='uploads/13.jpg') }}" alt="Bayle Image 3">
+        </div>
+        <!-- Carousel Controls for navigating Bayle images -->
+        <div class="carousel-control">
+            <!-- Button to go to the previous slide -->
+            <button onclick="prevSlide('bayle-carousel')">&#10094;</button>
+            <!-- Button to go to the next slide -->
+            <button onclick="nextSlide('bayle-carousel')">&#10095;</button>
+        </div>
+    </div>
+    
+    <!-- Wiki Section for Bayle information -->
+    <div class="wiki-section">
+        <!-- Overview of Bayle -->
+        <h4>Overview</h4>
+        <p>Bayle is known for his agility and deceptive attack patterns, making him a tricky opponent to face.</p>
+        
+        <!-- Strategies to defeat Bayle -->
+        <h4>Strategies</h4>
+        <ul>
+            <!-- Strategy 1 -->
+            <li>Use defensive maneuvers and stay alert to predict his movements.</li>
+            <!-- Strategy 2 -->
+            <li>Look for openings after he completes an attack sequence.</li>
+            <!-- Strategy 3 -->
+            <li>Use high-speed and precision attacks to counter his deceptive tactics.</li>
+        </ul>
+        
+        <!-- Weaknesses of Bayle -->
+        <h4>Weaknesses</h4>
+        <ul>
+            <!-- Weakness 1 -->
+            <li>Vulnerable to precise, high-speed attacks.</li>
+            <!-- Weakness 2 -->
+            <li>Can be outmaneuvered with quick reflexes and careful observation.</li>
+        </ul>
+    </div>
+</div>
 
-        const slideCount = slides.length;
-        let currentIndex = 1; // Start from the first clone (real first image)
-        inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+<!-- Text Box with Dropdown Navigation -->
+<div id="text-box" class="text-box hidden">
+    <!-- Content of the Text Box -->
+    <div class="text-box-content">
+        <!-- Heading for Guide Sections Dropdown -->
+        <h3>Guide Sections</h3>
+        
+        <!-- Dropdown Menu for selecting guide sections -->
+        <select class="custom-select" onchange="location = this.value;">
+            <!-- Default option -->
+            <option value="" selected>Choose a section</option>
+            <!-- Option for Radahn -->
+            <option value="#Radahn">Radahn</option>
+            <!-- Option for Renalla -->
+            <option value="#renalla">Renalla</option>
+            <!-- Option for Messmer -->
+            <option value="#messmer">Messmer</option>
+            <!-- Option for Gaius -->
+            <option value="#gaius">Gaius</option>
+            <!-- Option for Bayle -->
+            <option value="#bayle">Bayle</option>
+        </select>
+    </div>
+</div>
 
-        // Function to show slide
-        function showSlide(index) {
-            if (index >= slideCount + 1) {
-                // Move to the real first slide
-                inner.style.transition = 'none';
-                inner.style.transform = `translateX(0)`;
-                currentIndex = 1;
-                setTimeout(() => {
-                    inner.style.transition = 'transform 0.5s ease-in-out';
-                    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }, 20); // Small delay to trigger transition
-            } else if (index < 0) {
-                // Move to the real last slide
-                inner.style.transition = 'none';
-                inner.style.transform = `translateX(-${(slideCount) * 100}%)`;
-                currentIndex = slideCount;
-                setTimeout(() => {
-                    inner.style.transition = 'transform 0.5s ease-in-out';
-                    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }, 20); // Small delay to trigger transition
-            } else {
-                inner.style.transform = `translateX(-${index * 100}%)`;
-                currentIndex = index;
-            }
-        }
 
-        // Previous slide
-        function prevSlide() {
-            showSlide(currentIndex - 1);
-        }
-
-        // Next slide
-        function nextSlide() {
-            showSlide(currentIndex + 1);
-        }
-
-        // Add event listeners for carousel controls
-        carousel.querySelector('.carousel-control button:nth-child(1)').addEventListener('click', prevSlide);
-        carousel.querySelector('.carousel-control button:nth-child(2)').addEventListener('click', nextSlide);
+    
+<script>
+    // Initialize carousel on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Select all elements with the class 'carousel'
+      const carousels = document.querySelectorAll('.carousel');
+  
+      // Iterate through each carousel element
+      carousels.forEach(carousel => {
+          // Select the inner container of the carousel
+          const inner = carousel.querySelector('.carousel-inner');
+          // Get all child elements (slides) of the inner container
+          const slides = Array.from(inner.children);
+          
+          // Clone the first slide for seamless looping
+          const firstClone = slides[0].cloneNode(true);
+          // Clone the last slide for seamless looping
+          const lastClone = slides[slides.length - 1].cloneNode(true);
+  
+          // Append the first clone to the end of the inner container
+          inner.appendChild(firstClone);
+          // Insert the last clone before the first slide in the inner container
+          inner.insertBefore(lastClone, slides[0]);
+  
+          // Get the total number of slides including clones
+          const slideCount = slides.length;
+          // Start the carousel at the first clone (real first image)
+          let currentIndex = 1;
+          // Set initial transform to position the carousel at the first slide
+          inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+  
+          // Function to show a specific slide
+          function showSlide(index) {
+              if (index >= slideCount + 1) {
+                  // If index is beyond the last slide, move to the real first slide
+                  inner.style.transition = 'none'; // Disable transition for the reset
+                  inner.style.transform = `translateX(0)`;
+                  currentIndex = 1; // Set current index to the first slide
+                  // Trigger a transition to the new position after a short delay
+                  setTimeout(() => {
+                      inner.style.transition = 'transform 0.5s ease-in-out';
+                      inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                  }, 20);
+              } else if (index < 0) {
+                  // If index is before the first slide, move to the real last slide
+                  inner.style.transition = 'none'; // Disable transition for the reset
+                  inner.style.transform = `translateX(-${(slideCount) * 100}%)`;
+                  currentIndex = slideCount; // Set current index to the last slide
+                  // Trigger a transition to the new position after a short delay
+                  setTimeout(() => {
+                      inner.style.transition = 'transform 0.5s ease-in-out';
+                      inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                  }, 20);
+              } else {
+                  // Set the transform to show the specified slide
+                  inner.style.transform = `translateX(-${index * 100}%)`;
+                  currentIndex = index; // Update current index
+              }
+          }
+  
+          // Function to show the previous slide
+          function prevSlide() {
+              showSlide(currentIndex - 1);
+          }
+  
+          // Function to show the next slide
+          function nextSlide() {
+              showSlide(currentIndex + 1);
+          }
+  
+          // Add event listener for the previous slide button
+          carousel.querySelector('.carousel-control button:nth-child(1)').addEventListener('click', prevSlide);
+          // Add event listener for the next slide button
+          carousel.querySelector('.carousel-control button:nth-child(2)').addEventListener('click', nextSlide);
+      });
     });
-});
-// title animation
-function showAreaTitle() {
-    const areaTitle = document.getElementById('area-title');
-    areaTitle.classList.add('show');
-
-    // Fade out after 3 seconds
-    setTimeout(() => {
-        areaTitle.classList.remove('show');
-    }, 3000); // Adjust the time as needed
-}
-
-// Trigger the function when the page loads or when the user enters a specific section
-window.onload = showAreaTitle;
-
-// script.js
-document.addEventListener('DOMContentLoaded', () => {
-    const sprite3 = document.querySelector('.sprite3-img');
-    const textBox = document.getElementById('text-box');
-
-    // Function to toggle the visibility of the text box
-    function toggleTextBox() {
-        if (textBox.classList.contains('hidden')) {
-            textBox.classList.remove('hidden');
-            textBox.style.display = 'block'; // Make it visible
-        } else {
-            textBox.classList.add('hidden');
-            textBox.style.display = 'none'; // Hide it
-        }
+  
+    // Function to animate and show the area title
+    function showAreaTitle() {
+      // Select the area title element
+      const areaTitle = document.getElementById('area-title');
+      // Add the 'show' class to make it visible
+      areaTitle.classList.add('show');
+  
+      // Fade out the title after 3 seconds
+      setTimeout(() => {
+          // Remove the 'show' class to hide it
+          areaTitle.classList.remove('show');
+      }, 3000); // Time duration for the fade-out effect
     }
-
-    // Add click event listener to the sprite
-    sprite3.addEventListener('click', (event) => {
-        event.stopPropagation(); // Prevents the event from bubbling up and affecting other elements
-        toggleTextBox();
+  
+    // Trigger the showAreaTitle function when the page loads
+    window.onload = showAreaTitle;
+  
+    // script.js for additional functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      // Select the sprite image and text box elements
+      const sprite3 = document.querySelector('.sprite3-img');
+      const textBox = document.getElementById('text-box');
+  
+      // Function to toggle the visibility of the text box
+      function toggleTextBox() {
+          if (textBox.classList.contains('hidden')) {
+              // If the text box is hidden, show it
+              textBox.classList.remove('hidden');
+              textBox.style.display = 'block'; // Set display to block to make it visible
+          } else {
+              // If the text box is visible, hide it
+              textBox.classList.add('hidden');
+              textBox.style.display = 'none'; // Set display to none to hide it
+          }
+      }
+  
+      // Add click event listener to the sprite image
+      sprite3.addEventListener('click', (event) => {
+          // Stop the click event from bubbling up to other elements
+          event.stopPropagation();
+          // Toggle the visibility of the text box
+          toggleTextBox();
+      });
+  
+      // Optional: Handle clicks outside of the text box to hide it
+      document.addEventListener('click', (event) => {
+          // If the click is outside the text box and sprite image
+          if (!textBox.contains(event.target) && !sprite3.contains(event.target)) {
+              // Hide the text box
+              textBox.classList.add('hidden');
+              textBox.style.display = 'none'; // Set display to none to hide it
+          }
+      });
     });
-
-    // Optional: Handle clicks outside of the text box to hide it
-    document.addEventListener('click', (event) => {
-        if (!textBox.contains(event.target) && !sprite3.contains(event.target)) {
-            textBox.classList.add('hidden');
-            textBox.style.display = 'none'; // Hide text box when clicking outside
-        }
-    });
-});
-
-        
-    </script>
+  </script>
 </body>
 </html>
