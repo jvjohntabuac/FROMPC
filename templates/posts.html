@@ -1,61 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for the document -->
     <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page displayed on the browser tab -->
     <title>Home Page</title>
+    <!-- Link to the external CSS file for styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Tailwind CSS for utility-first styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <!-- Navbar Toggle Button -->
+    <!-- Navbar Toggle Button to open/close the sidebar -->
     <button onclick="toggleNavbar()" id="nav-toggle" class="nav-toggle">☰</button>
 
-    <!-- Sidebar Navbar -->
+    <!-- Sidebar Navbar containing navigation links -->
     <div id="navbar" class="navbar bg-gray-800 text-white p-4">
+        <!-- Button to close the sidebar -->
         <button onclick="closeNavbar()" class="nav-close">×</button>
+        <!-- Navigation menu items -->
         <ul>
             <li><a href="/create_post" class="block py-2 px-4 hover:bg-gray-600">Create a New Post</a></li>
             <li><a href="/DLC" class="block py-2 px-4 hover:bg-gray-600">DLC</a></li>
             <li><a href="/profile" class="block py-2 px-4 hover:bg-gray-600">Profile</a></li>
         </ul>
+        <!-- Logout button -->
         <a href="/logout" class="logout-button block py-2 px-4 mt-4 bg-red-600 hover:bg-red-800 text-center">Logout</a>
     </div>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Area of the page -->
     <div class="main-content bg-slate-200 p-4">
+        <!-- Welcome message with username -->
         <h1 class="text-xl font-bold">Welcome, {{ username }}</h1>
+        <!-- Heading for recent posts -->
         <h2 class="text-lg font-semibold mt-4">Recent Posts</h2>
+        <!-- Container for posts -->
         <div class="posts mt-4">
+            <!-- Loop through posts and display each one -->
             {% for post in posts %}
             <div class="post bg-white p-4 mb-4 border rounded shadow">
+                <!-- Section for voting buttons (if any) -->
                 <div class="vote-section">
-                    <!-- Voting buttons if any -->
+                    <!-- Voting buttons can be added here -->
                 </div>
+                <!-- Content of the post -->
                 <div class="post-content">
+                    <!-- Display post username and content -->
                     <p><strong>{{ post.username }}</strong>: {{ post.content }}</p>
+                    <!-- Display image if it exists -->
                     {% if post.image_url %}
                     <img src="{{ post.image_url }}" alt="User posted image" class="mt-2 max-w-full h-auto">
                     {% endif %}
+                    <!-- Display post creation date -->
                     <p class="mt-2 text-gray-600">Posted on {{ post.created_at }}</p>
+                    <!-- Comments section -->
                     <div class="comments-section">
+                        <!-- Button to toggle visibility of comments -->
                         <button class="comments-toggle">Comments ({{ post.comments|length }})</button>
+                        <!-- Container for comments, initially hidden -->
                         <div class="comments-list hidden">
+                            <!-- Loop through comments and display each one -->
                             {% for comment in post.comments %}
                             <div class="comment">
+                                <!-- Display comment username and content -->
                                 <p><strong>{{ comment.username }}</strong>: {{ comment.content }}</p>
+                                <!-- Display comment creation date -->
                                 <p class="text-gray-600 text-sm">{{ comment.created_at }}</p>
                             </div>
                             {% endfor %}
+                            <!-- Form to add a new comment -->
                             <form action="{{ url_for('add_comment', post_id=post.id) }}" method="POST" class="add-comment-form">
+                                <!-- CSRF token for form submission security -->
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <!-- Input field for the comment -->
                                 <input type="text" name="comment" placeholder="Add a comment..." required>
+                                <!-- Submit button for the form -->
                                 <button type="submit">Post</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Display message if there are no posts -->
             {% else %}
             <p>No posts to show.</p>
             {% endfor %}
@@ -63,18 +91,22 @@
     </div>
 
     <script>
+        // Function to toggle the visibility of the navbar
         function toggleNavbar() {
             document.getElementById("navbar").classList.toggle("active");
             document.getElementById("nav-toggle").classList.toggle("hidden");
         }
 
+        // Function to close the navbar
         function closeNavbar() {
             document.getElementById("navbar").classList.remove("active");
             document.getElementById("nav-toggle").classList.remove("hidden");
         }
 
+        // Add event listeners to all comment toggle buttons
         document.querySelectorAll('.comments-toggle').forEach(button => {
             button.addEventListener('click', () => {
+                // Toggle visibility of the comments list
                 const commentsList = button.nextElementSibling;
                 commentsList.classList.toggle('hidden');
             });
